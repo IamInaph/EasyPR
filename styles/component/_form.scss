@@ -1,0 +1,59 @@
+.form-control {
+  @apply relative lg:mb-6 mb-3;
+  label {
+    @apply text-slate-600  mb-2;
+  }
+}
+
+.validate {
+  @apply text-sm text-rose-500 absolute right-0 -bottom-6 flex items-center gap-1;
+}
+
+.input,
+.textarea,
+.select {
+  @apply bg-white border-gray-200 text-gray-900 rounded-md duration-300 ease-in-out font-normal text-base;
+  &:focus {
+    @apply border-slate-900;
+    outline-offset: 0px;
+    outline-width: 0;
+  }
+  &::placeholder {
+    @apply text-base;
+  }
+}
+
+.file-upload {
+  @apply border-2 border-dashed  flex flex-col lg:py-6 lg:px-10 p-6 text-center justify-center items-center rounded-xl mt-2  border-gray-300 relative;
+  input {
+    @apply block h-full w-full absolute top-0 bottom-0 left-0 right-0 opacity-0 cursor-pointer;
+  }
+}
+
+.label-text {
+  @apply text-lg font-medium text-slate-900;
+}
+
+.checkbox-custom {
+  @apply hidden border-0 h-6 w-6;
+}
+
+.radio:checked,
+.radio[aria-checked="true"] {
+  box-shadow: 0 0 0 3px #fff inset !important;
+}
+
+.radio {
+  box-shadow: 0 0 0 3px transparent inset;
+  @apply bg-white border-gray-300;
+}
+
+.checkbox-primary:checked,
+.checkbox-primary[checked="true"],
+.checkbox-primary[aria-checked="true"] {
+  @apply bg-white;
+}
+
+.checkbox-primary {
+  @apply border-gray-400;
+}

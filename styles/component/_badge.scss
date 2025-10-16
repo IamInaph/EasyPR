@@ -1,0 +1,12 @@
+.badge-primary {
+  @apply bg-primary-50 text-primary-500 border-0;
+}
+.badge-danger {
+  @apply bg-red-50 text-red-500 border-0;
+}
+.badge-warning {
+  @apply bg-yellow-50 text-yellow-500 border-0;
+}
+.badge-info {
+  @apply bg-blue-50 text-blue-500 border-0;
+}

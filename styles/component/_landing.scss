@@ -1,0 +1,43 @@
+.service-box {
+  @apply py-16 px-6 duration-500 ease-in-out;
+  background-image: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0)
+  );
+  // border: 1px solid rgba(0, 0, 0, 0.2);
+  &:hover {
+    background-image: linear-gradient(
+      150deg,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 1)
+    );
+  }
+}
+.stick-amount-primary {
+  @apply text-4xl text-slate-700 font-medium block;
+}
+.stick-amount {
+  @apply hidden text-4xl text-slate-700 font-medium duration-200 ease-in-out;
+}
+.stick-title {
+  @apply block text-slate-900 text-2xl duration-200 ease-in-out;
+}
+.stick-price {
+  @apply bg-white;
+  .card-plan {
+    @apply lg:gap-0 gap-4 p-2;
+  }
+  .stick-text {
+    @apply lg:hidden block;
+  }
+  .stick-amount {
+    @apply text-2xl mb-2 block;
+  }
+  .stick-title {
+    @apply text-lg font-normal;
+  }
+  .stick-amount-primary {
+    @apply lg:hidden block;
+  }
+}

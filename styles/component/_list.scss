@@ -1,0 +1,18 @@
+.list-number {
+  @apply block p-1 text-sm text-center  h-7 rounded-full bg-slate-700 text-white;
+  min-width: 26px;
+}
+.tick-list {
+  @apply pl-3;
+  li {
+    @apply pl-2;
+    &::marker {
+      content: url("https://api.iconify.design/charm/tick.svg?color=%2310b981");
+    }
+  }
+  li.disable {
+    &::marker {
+      content: "";
+    }
+  }
+}

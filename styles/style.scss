@@ -1,0 +1,17 @@
+@tailwind base;
+
+@import "base/index.scss";
+
+@tailwind components;
+
+@import "component/index.scss";
+
+@tailwind utilities;
+
+@import "vendor/index.scss";
+
+.faq-section {
+  .react-tabs__tab--selected {
+    background-color: #34dab9 !important;
+  }
+}

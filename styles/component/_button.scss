@@ -1,0 +1,65 @@
+.btn {
+  @apply rounded-lg  h-12 px-5 normal-case font-medium w-full;
+  @screen lg {
+    @apply w-fit;
+  }
+
+  &-sm {
+    @apply py-[.625rem];
+  }
+  &-lg {
+    @apply px-[1.75rem] py-[1rem] text-lg;
+  }
+
+  &-primary {
+    @apply text-white  relative top-0 left-0 bg-primary-300 hover:text-white  border-primary-300 hover:border-primary-400 hover:bg-primary-400;
+    transition: all 0.15s ease-in-out;
+  }
+
+  &-secondary {
+    @apply text-white font-normal bg-slate-900 hover:bg-slate-800 border-slate-900 hover:border-slate-800;
+  }
+  &-white {
+    @apply text-gray-900 font-normal bg-white hover:bg-white border-white hover:border-white;
+  }
+
+  &-link {
+    @apply text-gray-900  text-lg font-normal hover:no-underline;
+  }
+  &-icon {
+    svg {
+      @apply text-gray-400 duration-200 ease-linear;
+    }
+
+    &:hover {
+      @apply bg-slate-50;
+      svg {
+        @apply text-rose-500;
+      }
+    }
+  }
+  &-outline {
+    @apply bg-white border border-gray-300 text-gray-900  hover:border-slate-700 hover:bg-white hover:text-gray-900;
+    transition: all 0.15s ease-in-out;
+    z-index: 3;
+  }
+}
+
+.btn:is(input[type="checkbox"]):after,
+.btn:is(input[type="radio"]):after {
+  @apply capitalize;
+}
+
+.btn:is(input[type="checkbox"]:checked),
+.btn:is(input[type="radio"]:checked),
+.btn:is(input[type="checkbox"]:checked):hover,
+.btn:is(input[type="radio"]:checked):hover {
+  @apply bg-slate-900 text-white border-slate-900;
+}
+
+.join-item.btn {
+  @apply bg-white text-slate-900 border-slate-200;
+  &.bg-active {
+    @apply bg-black text-white;
+  }
+}

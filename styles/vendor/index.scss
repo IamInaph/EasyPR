@@ -1,0 +1,33 @@
+@import "slick-slider";
+@import "animation";
+@import "tabs";
+@import "swiper";
+
+.marquee {
+  align-items: center !important;
+  @apply my-6;
+}
+.marquee-container {
+  @apply py-5;
+  overflow: hidden !important;
+}
+
+.text-key {
+  @apply text-primary-400 uppercase text-lg block mb-2;
+}
+::selection {
+  @apply bg-primary-300 text-white;
+}
+
+.css-13cymwt-control,
+.css-t3ipsp-control {
+  min-height: 48px !important;
+}
+.css-13cymwt-control {
+  border: 1px solid #eaecf0 !important;
+}
+
+.css-t3ipsp-control {
+  border: 1px solid #333 !important;
+  box-shadow: none !important;
+}

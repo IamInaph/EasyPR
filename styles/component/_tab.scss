@@ -1,0 +1,32 @@
+.tab-active {
+  @apply bg-white duration-300 ease-in-out;
+  box-shadow: 32px 32px 64px 0px rgba(52, 64, 84, 0.08);
+}
+
+.tab-block {
+  .content {
+    @apply max-h-0 duration-300 ease-in-out overflow-hidden;
+  }
+  &.tab-open {
+    .content {
+      @apply max-h-28  duration-300 ease-in-out overflow-hidden;
+    }
+  }
+}
+.tab-active {
+  @apply relative overflow-hidden rounded-2xl w-full;
+  &:after {
+    content: "";
+    @apply bg-primary-300 h-1 absolute bottom-0 left-0 z-20;
+    animation: lineanimation 10s linear forwards;
+
+    @keyframes lineanimation {
+      0% {
+        width: 0px;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+  }
+}

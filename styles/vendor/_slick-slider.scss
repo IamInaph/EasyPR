@@ -1,0 +1,61 @@
+.slick {
+    // &-track {
+    //     @apply py-8;
+    // }
+
+    &-slide {
+        @apply min-h-full;
+
+        @media screen and (min-width:992px) {
+            max-width: 100%;
+        }
+    }
+
+}
+
+.slick-arrow.slick-prev,
+.slick-arrow.slick-next {
+    @apply h-full w-32 z-40;
+
+    &::before {
+        display: none !important;
+
+        @screen md {
+            display: block !important;
+        }
+    }
+}
+
+
+.slick-arrow.slick-prev {
+    left: 36px;
+
+    @media screen and (min-width:992px) {
+        left: 10px;
+    }
+
+    &::before {
+        @apply text-4xl h-16 w-16 block rounded-full py-3 bg-slate-900;
+        content: "\2190";
+        font-family: 'Courier New', Courier, monospace;
+        // background: url('https://api.iconify.design/bi/arrow-left-circle-fill.svg') no-repeat center center / contain;
+    }
+
+
+}
+
+.slick-arrow.slick-next {
+    right: 36px;
+
+    @media screen and (min-width:992px) {
+        right: -15px;
+    }
+
+    &::before {
+        @apply text-4xl h-16 w-16 block rounded-full py-3 bg-slate-900;
+        font-family: 'Courier New', Courier, monospace;
+        content: "\2192";
+        margin-left: 40px;
+
+    }
+}

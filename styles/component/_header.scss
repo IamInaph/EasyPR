@@ -1,0 +1,34 @@
+header {
+  @apply py-4 border-b relative;
+  &.shrink-header {
+    @apply py-2 border-b shadow-md;
+  }
+}
+.main-menu {
+  @apply flex-col gap-4 flex fixed w-full bg-white -top-[200vh] left-0 h-screen duration-300  ease-in-out py-20 px-12 border-t-4 border-primary-300;
+  index: 100;
+  .nav-link {
+    @apply text-2xl;
+  }
+  @screen lg {
+    @apply flex-row relative h-fit top-0 ml-auto justify-end items-center p-0  gap-8 border-0;
+    .nav-link {
+      @apply text-base;
+    }
+  }
+  &.active {
+    @apply top-0;
+  }
+}
+.menu-button {
+  @apply fixed bottom-0 left-0 w-full z-50 p-3 border-t flex-row bg-white  min-w-[22rem] justify-end flex gap-2;
+  .btn-main {
+    @apply w-full;
+  }
+  @screen lg {
+    @apply relative w-auto border-0 p-0;
+  }
+}
+.nav-link {
+  @apply py-3 block text-base;
+}

@@ -1,0 +1,53 @@
+.package {
+  &-card {
+    @apply flex flex-col justify-between border  border-slate-200 rounded-lg bg-white items-center overflow-hidden;
+  }
+  &-title {
+    @apply block text-base text-gray-900;
+    @screen lg {
+      @apply block text-xl;
+    }
+  }
+  &-price {
+    @apply text-gray-600 text-lg font-normal;
+    @screen lg {
+      @apply block text-xl;
+    }
+  }
+  &-active {
+    @apply border-primary-400 bg-primary-25 border-2;
+    .package-content {
+      @apply max-h-[80rem] duration-500 ease-in-out;
+    }
+  }
+  &-block {
+    @apply flex flex-col justify-between  p-3  items-start w-full cursor-pointer;
+    @screen lg {
+      @apply flex-row;
+    }
+  }
+  &-content {
+    @apply bg-white w-full lg:px-8 px-2 max-h-0 duration-500 ease-in-out cursor-pointer;
+  }
+}
+
+.writing-package {
+  .package-card:first-child {
+    @apply mb-10 relative overflow-visible;
+
+    &:before {
+      content: "For better results choose a package below";
+      @apply inline-block absolute min-w-[20rem] top-[7.6rem] bg-white left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-400 z-20 px-2;
+      @screen lg {
+        @apply top-[6.5rem] w-fit;
+      }
+    }
+    &:after {
+      content: "";
+      @apply hidden absolute h-0.5 w-full left-0 top-[6.5rem] bg-gray-200 z-10;
+      @screen lg {
+        @apply block;
+      }
+    }
+  }
+}
