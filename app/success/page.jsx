@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export async function generateMetadata() {
 	return {
-		metadataBase: new URL('https://www.easyprwire.com'),
+		metadataBase: new URL('https://easyprwire.com'),
 		title: 'Press Release Submitted Successfully | EasyPRWire',
 		description:
 			'Your press release has been submitted successfully. Our team will review it shortly. Expect publication within 24 hours.',
@@ -14,7 +14,7 @@ export async function generateMetadata() {
 		openGraph: {
 			type: 'website',
 			locale: 'en_IE',
-			url: 'https://www.easyprwire.com/success',
+			url: 'https://easyprwire.com/success',
 			siteName: 'Easy PR',
 			images: [
 				{

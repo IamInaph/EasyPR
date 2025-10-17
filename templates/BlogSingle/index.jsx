@@ -16,6 +16,7 @@ import {
 	LinkedinShareButton,
 	TwitterShareButton,
 } from 'react-share'
+import Head from 'next/head'
 
 export default function BlogSingle({ blogData, params, className }) {
 	const shareUrl = 'https://www.easyprwire.com/blog/'
@@ -26,6 +27,8 @@ export default function BlogSingle({ blogData, params, className }) {
 	const filteredBlogs = blogPageData?.filter(
 		(item) => item.attributes.slug !== params.slug
 	)
+
+	console.log(blogData)
 
 	return (
 		<>
@@ -209,7 +212,10 @@ export default function BlogSingle({ blogData, params, className }) {
 						<div className='grid grid-cols-3 gap-8'>
 							{filteredBlogs &&
 								filteredBlogs.slice(0, 3).map((item, index) => (
-									<div className='col-span-3 md:col-span-1'>
+									<div
+										className='col-span-3 md:col-span-1'
+										key={'blog' + index}
+									>
 										<BlogCard
 											blogs={item}
 											key={'blog home' + index}

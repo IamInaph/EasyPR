@@ -6,7 +6,7 @@ export async function generateMetadata({ params }) {
 	const fetchBlogs = async () => {
 		try {
 			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/api/newsrooms?populate=deep`
+				`${process.env.NEXT_PUBLIC_API_URL}/api/newsroom-page/?populate=deep`
 			)
 			const data = await res.json()
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
 
 	const blogPageData = await fetchBlogs()
 
-	const blogs = blogPageData?.data // <-- this is the array
+	const blogs = blogPageData?.data?.attributes?.newsrooms?.data // <-- this is the array
 	if (!Array.isArray(blogs)) {
 		return {
 			title: 'Invalid Data',
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
 		}
 	}
 
-	const currentBlog = blogPageData?.data?.find(
+	const currentBlog = blogs?.find(
 		(item) => item.attributes.slug === params.slug
 	)
 
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }) {
 	}))
 
 	return {
-		metadataBase: new URL('https://www.easyprwire.com'),
+		metadataBase: new URL('https://easyprwire.com'),
 		title: seo?.metaTitle || currentBlog.attributes.title,
 		description: seo?.metaDescription || 'Read the full article on EasyPRWire.',
 		alternates: {
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }) {
 		openGraph: {
 			type: 'article',
 			locale: 'en_IE',
-			url: `https://www.easyprwire.com/blog/${params.slug}`,
+			url: `https://easyprwire.com/blog/${params.slug}`,
 			siteName: 'Easy PR',
 			title: seo?.metaTitle || currentBlog.attributes.title,
 			description: seo?.metaDescription,

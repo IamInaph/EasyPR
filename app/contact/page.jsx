@@ -30,7 +30,7 @@ export async function generateMetadata() {
 		alt: img?.attributes?.alternativeText || img?.attributes?.name,
 	}))
 	return {
-		metadataBase: new URL('https://www.easyprwire.com'),
+		metadataBase: new URL('https://easyprwire.com'),
 		title:
 			contactMeta?.metaTitle ||
 			'Contact Us | Publish your News, Stories & More | EasyPRwire',
@@ -43,7 +43,7 @@ export async function generateMetadata() {
 		openGraph: {
 			type: 'website',
 			locale: 'en_IE',
-			url: 'https://www.easyprwire.com/contact',
+			url: 'https://easyprwire.com/contact',
 			siteName: 'Easy PR',
 			images: ogImages,
 			twitter: {

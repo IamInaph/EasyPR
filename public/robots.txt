@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /message-confirmation
+Disallow: /order/
+
+# Host
+Host: https://easyprwire.com
+
+# Sitemaps
+Sitemap: https://easyprwire.com/sitemap.xml

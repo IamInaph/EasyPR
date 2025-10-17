@@ -11,6 +11,21 @@ const nextConfig = {
 			'admin.easyprwire.xyzundefined',
 		],
 	},
+	async redirects() {
+		return [
+			{
+				source: '/:path*',
+				has: [
+					{
+						type: 'host',
+						value: 'www.easyprwire.com',
+					},
+				],
+				destination: 'https://easyprwire.com/:path*',
+				permanent: true,
+			},
+		]
+	},
 }
 
 module.exports = nextConfig

@@ -15,7 +15,7 @@ export async function generateMetadata() {
 		alt: img?.attributes?.alternativeText || img?.attributes?.name,
 	}))
 	return {
-		metadataBase: new URL('https://www.easyprwire.com'),
+		metadataBase: new URL('https://easyprwire.com'),
 		title: AboutMeta.metaTitle,
 		description: AboutMeta.metaDescription,
 		alternates: {
@@ -24,7 +24,7 @@ export async function generateMetadata() {
 		openGraph: {
 			type: 'website',
 			locale: 'en_IE',
-			url: 'https://www.easyprwire.com/blog',
+			url: 'https://easyprwire.com/blog',
 			siteName: 'Easy PR',
 			images: ogImages,
 			twitter: {
