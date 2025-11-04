@@ -9,6 +9,23 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Icon } from "@iconify/react";
+import {
+  PenTool,
+  Newspaper,
+  ShieldCheck,
+  Send,
+  Target,
+  LineChart,
+} from "lucide-react";
+
+const iconMap = {
+  Writing: PenTool,
+  "Media Coverage": Newspaper,
+  "Results & Trust": ShieldCheck,
+  "Publish Your Press Release Within 7 Days": Send,
+  "Reach Buyers Who Are Searching for You": Target,
+  "Boost Your SEO and Google Rankings": LineChart,
+};
 
 const TestimonialCard = ({ testimonial }) => {
   return (
@@ -43,7 +60,7 @@ const TestimonialCard = ({ testimonial }) => {
   );
 };
 
-export default function ServicePage({ serviceData, partner }) {
+export default function ServicePage({ serviceData, partner, faqs, homeData }) {
   const service = serviceData?.data?.attributes;
 
   const testimonials = [
@@ -121,6 +138,7 @@ export default function ServicePage({ serviceData, partner }) {
       },
     ],
   };
+  console.log(homeData, faqs);
 
   return (
     <Layout>
@@ -155,6 +173,7 @@ export default function ServicePage({ serviceData, partner }) {
       </section>
 
       <section>
+        <h2 className="text-center"> Trusted By 1000+ Companies WorldWide</h2>
         <Partner partner={partner} />
       </section>
 
@@ -185,13 +204,24 @@ export default function ServicePage({ serviceData, partner }) {
               {service?.howItWorks?.title}
             </h2>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            {service?.howItWorks?.steps.map((step, index) => (
-              <div key={index} className="p-8 border rounded-lg">
-                <h3 className="text-2xl font-bold mb-2">{step.title}</h3>
-                <p>{step.description}</p>
-              </div>
-            ))}
+            {service?.howItWorks?.steps.map((step, index) => {
+              const Icon = iconMap[step.title] || ShieldCheck; // fallback icon if no match
+              return (
+                <div
+                  key={index}
+                  className="p-8 border rounded-2xl text-center shadow-sm hover:shadow-md transition-shadow duration-300">
+                  <div className="flex justify-center mb-4">
+                    <div className="bg-primary/10 text-primary p-4 rounded-full">
+                      <Icon size={32} strokeWidth={1.5} />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-gray-600">{step.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -237,9 +267,7 @@ export default function ServicePage({ serviceData, partner }) {
 
       {/* FAQ Section */}
       <section className="py-20">
-        <div className="container">
-          {service?.faq && <Faq faqs={service?.faq} />}
-        </div>
+        <div className="container">{faqs && <Faq faqs={faqs} />}</div>
       </section>
     </Layout>
   );
