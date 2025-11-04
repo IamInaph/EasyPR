@@ -1,5 +1,4 @@
 import { fetchAPI } from "@/utils/api";
-
 export async function getServicePageData() {
   // For now, we'll return static data based on the PDF.
   // Later, this can be fetched from a CMS.
@@ -56,28 +55,34 @@ export async function getServicePageData() {
             title: "How EasyPr Can Help?",
             steps: [
               {
-                title: "H3: Feature",
-                description: "Short Description",
+                title: "Writing",
+                description:
+                  "Our expert team creates a high-quality press release focused on your story. Every release is written to attract media attention and connect with your target audience.",
               },
               {
-                title: "H3: Feature",
-                description: "Short Description",
+                title: "Media Coverage",
+                description:
+                  "Once approved, we publish your release across a network of 400+ news websites, blogs, and industry media channels. This helps expand your reach and boost brand awareness.",
               },
               {
-                title: "H3: Feature",
-                description: "Short Description",
+                title: "Results & Trust",
+                description:
+                  "You’ll receive a detailed report with live links to every placement, plus a trust badge you can use on your website. Enjoy increased SEO, media exposure, and brand credibility.",
               },
               {
-                title: "H3: Feature",
-                description: "Short Description",
+                title: "Publish Your Press Release Within 7 Days",
+                description:
+                  "Skip the wait. Our expert press release distribution service gets your story published on high-traffic media sites in less than a week. Gain faster exposure and better momentum for your brand.",
               },
               {
-                title: "H3: Feature",
-                description: "Short Description",
+                title: "Reach Buyers Who Are Searching for You",
+                description:
+                  "We distribute your news to relevant media channels and connect you with journalists and audiences who are already looking for products and services like yours.",
               },
               {
-                title: "H3: Feature",
-                description: "Short Description",
+                title: "Boost Your SEO and Google Rankings",
+                description:
+                  "Each press release builds backlinks from trusted media outlets. Improve your search visibility, grow your domain authority, and attract organic traffic that converts.",
               },
             ],
           },
