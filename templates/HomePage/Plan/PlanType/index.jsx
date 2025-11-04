@@ -3,19 +3,26 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import PlanReport from '../PlanReport'
 
-export default function PlanType({ plan }) {
+export default function PlanType({ plan, indiePage }) {
 	const [istop, setistop] = useState(true)
 
-	const listenScrollEvent = () => {
-		if (window.scrollY > 2850) {
-			setistop(false)
-		} else {
-			setistop(true)
-		}
-	}
 	useEffect(() => {
+		const listenScrollEvent = () => {
+			const scrollY = window.scrollY
+			const limit = indiePage ? 412 : 2850
+
+			// Only update if necessary
+			if (scrollY > limit && istop) {
+				setistop(false)
+			} else if (scrollY <= limit && !istop) {
+				setistop(true)
+			}
+		}
+
 		window.addEventListener('scroll', listenScrollEvent)
-	})
+		return () => window.removeEventListener('scroll', listenScrollEvent)
+	}, [indiePage, istop])
+
 
 	const handleReportDownload = (e, name, url) => {
 		e.preventDefault()
