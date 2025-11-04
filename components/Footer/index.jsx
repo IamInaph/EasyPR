@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
-import LogoWhite from "../Svg/LogoWhite";
+import Image from 'next/image'
+import Link from 'next/link'
+import LogoWhite from '../Svg/LogoWhite'
 
 export default function Footer() {
-  let mail = "hello@easyprwire.com"
-  return (
+	let mail = 'hello@easyprwire.com'
+	return (
 		<>
 			<footer>
 				<div className='container flex flex-col gap-20'>
@@ -39,6 +39,11 @@ export default function Footer() {
 										</li>
 										<li className='nav-link '>
 											<Link href='/#pricing-plan'>Order Now</Link>
+										</li>
+										<li className='nav-link'>
+											<Link href='/faqs' className='nav-link '>
+												FAQs
+											</Link>
 										</li>
 									</ul>
 								</div>

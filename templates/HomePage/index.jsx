@@ -1,7 +1,6 @@
 // import Layout from "@/components/Layout";
 "use client";
 import dynamic from "next/dynamic";
-import { useEffect } from "react";
 
 const Hero = dynamic(() => import("./Hero"));
 const Feature = dynamic(() => import("./Feature"));
@@ -15,10 +14,6 @@ const Review = dynamic(() => import("./Review"));
 const Offer = dynamic(() => import("./Offer"));
 
 const Layout = dynamic(() => import("@/components/Layout"));
-// export const metadata = {
-//   // title: { homeData },
-//   decription: "Test Data",
-// };
 
 export default function HomePage({ homeData }) {
 
