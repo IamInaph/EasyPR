@@ -60,7 +60,7 @@ const TestimonialCard = ({ testimonial }) => {
   );
 };
 
-export default function ServicePage({ serviceData, partner }) {
+export default function ServicePage({ serviceData, partner, faqs, homeData }) {
   const service = serviceData?.data?.attributes;
 
   const testimonials = [
@@ -138,6 +138,7 @@ export default function ServicePage({ serviceData, partner }) {
       },
     ],
   };
+  console.log(homeData, faqs);
 
   return (
     <Layout>
@@ -266,9 +267,7 @@ export default function ServicePage({ serviceData, partner }) {
 
       {/* FAQ Section */}
       <section className="py-20">
-        <div className="container">
-          {service?.faq && <Faq faqs={service?.faq} />}
-        </div>
+        <div className="container">{faqs && <Faq faqs={faqs} />}</div>
       </section>
     </Layout>
   );
