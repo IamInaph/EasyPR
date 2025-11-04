@@ -178,7 +178,7 @@ export default function ServicePage({ serviceData, partner, faqs, homeData }) {
       </section>
 
       {/* Advantage Section */}
-      <section className="bg-white py-20">
+      {/* <section className="bg-white py-20">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-4xl font-bold mb-4">
@@ -194,7 +194,7 @@ export default function ServicePage({ serviceData, partner, faqs, homeData }) {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* How it Works Section */}
       <section className="py-20" id="service_how_it_works">
