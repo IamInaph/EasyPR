@@ -9,7 +9,6 @@ const nextConfig = {
 			'admin.easyprwire.xyz',
 			'admin.easyprwire.com',
 			'admin.easyprwire.xyzundefined',
-			'via.placeholder.com',
 		],
 	},
 	async redirects() {
