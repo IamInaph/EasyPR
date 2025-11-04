@@ -13,9 +13,9 @@ export default function Plan({ plan }) {
 			<section id='plan'>
 				<div className='container'>
 					<div className='text-center max-w-md mx-auto mb-10'>
-						<span className='text-key'>{plan?.section.name}</span>
-						<h2>{plan?.section.title}</h2>
-						<span>{plan?.section.subTitle}</span>
+						<span className='text-key'>{plan?.section?.name}</span>
+						<h2>{plan?.section?.title}</h2>
+						<span>{plan?.section?.subTitle}</span>
 					</div>
 				</div>
 
