@@ -1,8 +1,10 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Logo from "@/components/Svg/Logo";
-import { Icon } from "@iconify/react";
+
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
+import Logo from '@/components/Svg/Logo'
+import { Icon } from '@iconify/react'
 import {
   DropdownMenu,
   DropdownMenuContent,
