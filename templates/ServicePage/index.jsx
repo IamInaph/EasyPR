@@ -208,12 +208,36 @@ export default function ServicePage({ serviceData, partner, faqs, homeData }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
             {service?.howItWorks?.steps.map((step, index) => {
               const Icon = iconMap[step.title] || ShieldCheck; // fallback icon if no match
+              const iconStyles = [
+                {
+                  bgColor: "bg-primary-100",
+                  textColor: "text-primary-600",
+                },
+                {
+                  bgColor: "bg-slate-100",
+                  textColor: "text-slate-600",
+                },
+                {
+                  bgColor: "bg-gray-100",
+                  textColor: "text-gray-600",
+                },
+                {
+                  bgColor: "bg-[#F4F3FF]",
+                  textColor: "text-[#7A5AF8]",
+                },
+                {
+                  bgColor: "bg-[#FFF6ED]",
+                  textColor: "text-[#FB6514]",
+                },
+              ];
+              const style = iconStyles[index % iconStyles.length];
               return (
                 <div
                   key={index}
                   className="p-8 border rounded-2xl text-center shadow-sm hover:shadow-md transition-shadow duration-300">
                   <div className="flex justify-center mb-4">
-                    <div className="bg-primary/10 text-primary p-4 rounded-full">
+                    <div
+                      className={`p-4 rounded-full ${style.bgColor} ${style.textColor}`}>
                       <Icon size={32} strokeWidth={1.5} />
                     </div>
                   </div>
