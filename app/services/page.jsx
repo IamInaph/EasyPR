@@ -35,12 +35,17 @@ export default async function Service() {
     return content?.section?.uid === "faqs";
   })?.[0];
 
+  const plan = homeData?.data?.data?.attributes?.content?.filter((content) => {
+    return content?.section?.uid === "pricing";
+  })?.[0];
+
   return (
     <ServicePage
       serviceData={serviceData?.data}
       partner={partner[0]}
       faqs={faqs}
       homeData={homeData?.data}
+      plan={plan}
     />
   );
 }
