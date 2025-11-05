@@ -60,7 +60,13 @@ const TestimonialCard = ({ testimonial }) => {
   );
 };
 
-export default function ServicePage({ serviceData, partner, faqs, homeData }) {
+export default function ServicePage({
+  serviceData,
+  partner,
+  faqs,
+  homeData,
+  plan,
+}) {
   const service = serviceData?.data?.attributes;
 
   const testimonials = [
@@ -141,39 +147,61 @@ export default function ServicePage({ serviceData, partner, faqs, homeData }) {
   console.log(homeData, faqs);
 
   return (
-    <Layout>
+    <Layout plan={plan}>
       {/* Hero Section */}
-      <section className="bg-white py-20">
+      <section className="py-[1.5rem] lg:py-[3rem] pb-[1.25rem]">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="max-w-3xl">
-              <h1 className="text-5xl font-bold mb-4">
-                {service?.hero?.title}
-              </h1>
-              <p className="text-lg">{service?.hero?.description}</p>
-              <div className="mt-8">
-                <a href="/#pricing-plan" className="btn btn-primary mr-4">
+          <div className="grid lg:grid-cols-2 gap-6">
+            <div className="flex flex-col gap-12 ">
+              <div>
+                <div className="flex flex-col lg:flex-row gap-2 items-center">
+                  <div className="relative min-w-52 min-h-12 block"></div>
+                  <div>
+                    <div className="min-h-12"></div>
+                  </div>
+                </div>
+                <h1 className="lg:text-[3.75rem] text-[2.5rem] mx-auto lg:mx-0 leading-[3rem] lg:leading-tight lg:text-left text-center font-bold mb-0">
+                  {service?.hero?.title}
+                </h1>
+              </div>
+              <div>
+                <div className="text-gray-500 text-[1.25rem] lg:text-left text-center">
+                  {service?.hero?.description}
+                </div>
+              </div>
+              <div className="flex lg:flex-row flex-col gap-4 items-center">
+                <a
+                  href="/#pricing-plan"
+                  className="btn btn-primary btn-lg lg:w-64 w-full">
                   {service?.hero?.ctaButton1}
                 </a>
-                <a href="#service_how_it_works" className="btn btn-secondary">
+                <a
+                  href="#service_how_it_works"
+                  className="btn btn-outline btn-lg lg:w-64 w-full">
                   {service?.hero?.ctaButton2}
                 </a>
               </div>
             </div>
             <div>
-              <Image
-                src="/images/hero.png"
-                width={640}
-                height={500}
-                alt="Hero Image"
-              />
+              <figure className="relative h-full">
+                <Image
+                  src="/images/hero.png"
+                  fill
+                  sizes="100vw"
+                  priority
+                  className="object-contain"
+                  alt="Hero Image"
+                />
+              </figure>
             </div>
           </div>
         </div>
       </section>
 
       <section>
-        <h2 className="text-center"> Trusted By 1000+ Companies WorldWide</h2>
+        <div className="container">
+          <h2 className="text-center"> Trusted By 1000+ Companies WorldWide</h2>
+        </div>
         <Partner partner={partner} />
       </section>
 
@@ -208,12 +236,36 @@ export default function ServicePage({ serviceData, partner, faqs, homeData }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
             {service?.howItWorks?.steps.map((step, index) => {
               const Icon = iconMap[step.title] || ShieldCheck; // fallback icon if no match
+              const iconStyles = [
+                {
+                  bgColor: "bg-primary-100",
+                  textColor: "text-primary-600",
+                },
+                {
+                  bgColor: "bg-slate-100",
+                  textColor: "text-slate-600",
+                },
+                {
+                  bgColor: "bg-gray-100",
+                  textColor: "text-gray-600",
+                },
+                {
+                  bgColor: "bg-[#F4F3FF]",
+                  textColor: "text-[#7A5AF8]",
+                },
+                {
+                  bgColor: "bg-[#FFF6ED]",
+                  textColor: "text-[#FB6514]",
+                },
+              ];
+              const style = iconStyles[index % iconStyles.length];
               return (
                 <div
                   key={index}
                   className="p-8 border rounded-2xl text-center shadow-sm hover:shadow-md transition-shadow duration-300">
                   <div className="flex justify-center mb-4">
-                    <div className="bg-primary/10 text-primary p-4 rounded-full">
+                    <div
+                      className={`p-4 rounded-full ${style.bgColor} ${style.textColor}`}>
                       <Icon size={32} strokeWidth={1.5} />
                     </div>
                   </div>
