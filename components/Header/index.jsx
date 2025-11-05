@@ -71,8 +71,8 @@ const Header = ({ plan }) => {
                 </Link>
               </div> */}
               <div>
-                <Link className="nav-link" href="/#faq">
-                  Guide
+                <Link className="nav-link" href="/blog">
+                  Blogs
                 </Link>
               </div>
               <div>

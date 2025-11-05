@@ -152,10 +152,10 @@ export default function ServicePage({ serviceData, partner, faqs, homeData }) {
               </h1>
               <p className="text-lg">{service?.hero?.description}</p>
               <div className="mt-8">
-                <a href="#" className="btn btn-primary mr-4">
+                <a href="/#pricing-plan" className="btn btn-primary mr-4">
                   {service?.hero?.ctaButton1}
                 </a>
-                <a href="#" className="btn btn-secondary">
+                <a href="#service_how_it_works" className="btn btn-secondary">
                   {service?.hero?.ctaButton2}
                 </a>
               </div>
@@ -178,7 +178,7 @@ export default function ServicePage({ serviceData, partner, faqs, homeData }) {
       </section>
 
       {/* Advantage Section */}
-      <section className="bg-white py-20">
+      {/* <section className="bg-white py-20">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-4xl font-bold mb-4">
@@ -194,10 +194,10 @@ export default function ServicePage({ serviceData, partner, faqs, homeData }) {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* How it Works Section */}
-      <section className="py-20">
+      <section className="py-20" id="service_how_it_works">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-4xl font-bold mb-4">

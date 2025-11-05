@@ -6,9 +6,9 @@ import React from "react";
 export default function BlogPage({ blogData }) {
   const blogPageData = blogData.data.attributes;
   const sortedBlogs = [...(blogPageData?.blogs?.data || [])].sort(
-		(a, b) =>
-			new Date(b.attributes.createdAt) - new Date(a.attributes.createdAt)
-	)
+    (a, b) =>
+      new Date(b.attributes.publishedAt) - new Date(a.attributes.publishedAt)
+  );
   return (
     <>
       <Layout>
