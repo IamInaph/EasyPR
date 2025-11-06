@@ -16,6 +16,8 @@ import {
   Send,
   Target,
   LineChart,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 const iconMap = {
@@ -56,6 +58,30 @@ const TestimonialCard = ({ testimonial }) => {
           </p>
         </div>
       </div>
+    </div>
+  );
+};
+
+const NextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} absolute top-1/2 -translate-y-1/2 right-4 z-10 cursor-pointer bg-white/30 backdrop-blur-sm rounded-full p-2`}
+      onClick={onClick}
+    >
+      <ChevronRight className="h-6 w-6 text-black" />
+    </div>
+  );
+};
+
+const PrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} absolute top-1/2 -translate-y-1/2 left-4 z-10 cursor-pointer bg-white/30 backdrop-blur-sm rounded-full p-2`}
+      onClick={onClick}
+    >
+      <ChevronLeft className="h-6 w-6 text-black" />
     </div>
   );
 };
@@ -128,7 +154,8 @@ export default function ServicePage({
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    arrows: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
