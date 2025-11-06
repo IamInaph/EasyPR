@@ -1,90 +1,12 @@
 "use client";
 import Layout from "@/components/Layout";
-import Image from "next/image";
 import Faq from "@/templates/HomePage/Faq";
 import Plan from "@/templates/HomePage/Plan";
 import Started from "@/templates/HomePage/Started";
 import Partner from "@/templates/HomePage/Partner";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { Icon } from "@iconify/react";
-import {
-  PenTool,
-  Newspaper,
-  ShieldCheck,
-  Send,
-  Target,
-  LineChart,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
-
-const iconMap = {
-  Writing: PenTool,
-  "Media Coverage": Newspaper,
-  "Results & Trust": ShieldCheck,
-  "Publish Your Press Release Within 7 Days": Send,
-  "Reach Buyers Who Are Searching for You": Target,
-  "Boost Your SEO and Google Rankings": LineChart,
-};
-
-const TestimonialCard = ({ testimonial }) => {
-  return (
-    <div className="p-8 border rounded-xl bg-white">
-      <div className="flex items-center mb-4">
-        {[...Array(5)].map((_, i) => (
-          <Icon
-            key={i}
-            icon={i < testimonial.rating ? "mdi:star" : "mdi:star-outline"}
-            style={{ color: i < testimonial.rating ? "#34DAB9" : "#E5E7EB" }}
-          />
-        ))}
-      </div>
-
-      <p>{testimonial.review}</p>
-      <div className="flex items-center">
-        <Image
-          src={testimonial.reviewer.imageUrl}
-          width={50}
-          height={50}
-          alt={testimonial.reviewer.name}
-          className="rounded-full mr-4"
-        />
-        <div>
-          <p className="mb-2">{testimonial.reviewer.name}</p>
-          <p className="text-sm text-gray-500">
-            {testimonial.reviewer.designation}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const NextArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} absolute top-1/2 -translate-y-1/2 right-4 z-10 cursor-pointer bg-white/30 backdrop-blur-sm rounded-full p-2`}
-      onClick={onClick}
-    >
-      <ChevronRight className="h-6 w-6 text-black" />
-    </div>
-  );
-};
-
-const PrevArrow = (props) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} absolute top-1/2 -translate-y-1/2 left-4 z-10 cursor-pointer bg-white/30 backdrop-blur-sm rounded-full p-2`}
-      onClick={onClick}
-    >
-      <ChevronLeft className="h-6 w-6 text-black" />
-    </div>
-  );
-};
+import Hero from "./Hero";
+import HowItWorks from "./HowItWorks";
+import Testimonials from "./Testimonials";
 
 export default function ServicePage({
   serviceData,
@@ -148,82 +70,11 @@ export default function ServicePage({
     },
   ];
 
-  const testimonialSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
   console.log(homeData, faqs);
 
   return (
     <Layout plan={plan}>
-      {/* Hero Section */}
-      <section className="py-[1.5rem] lg:py-[3rem] pb-[1.25rem]">
-        <div className="container">
-          <div className="grid lg:grid-cols-2 gap-6">
-            <div className="flex flex-col gap-12 ">
-              <div>
-                <div className="flex flex-col lg:flex-row gap-2 items-center">
-                  <div className="relative min-w-52 min-h-12 block"></div>
-                  <div>
-                    <div className="min-h-12"></div>
-                  </div>
-                </div>
-                <h1 className="lg:text-[3.75rem] text-[2.5rem] mx-auto lg:mx-0 leading-[3rem] lg:leading-tight lg:text-left text-center font-bold mb-0">
-                  {service?.hero?.title}
-                </h1>
-              </div>
-              <div>
-                <div className="text-gray-500 text-[1.25rem] lg:text-left text-center">
-                  {service?.hero?.description}
-                </div>
-              </div>
-              <div className="flex lg:flex-row flex-col gap-4 items-center">
-                <a
-                  href="/#pricing-plan"
-                  className="btn btn-primary btn-lg lg:w-64 w-full">
-                  {service?.hero?.ctaButton1}
-                </a>
-                <a
-                  href="#service_how_it_works"
-                  className="btn btn-outline btn-lg lg:w-64 w-full">
-                  {service?.hero?.ctaButton2}
-                </a>
-              </div>
-            </div>
-            <div>
-              <figure className="relative h-full">
-                <Image
-                  src="/images/hero.png"
-                  fill
-                  sizes="100vw"
-                  priority
-                  className="object-contain"
-                  alt="Hero Image"
-                />
-              </figure>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero service={service} />
 
       <section>
         <div className="container">
@@ -232,98 +83,9 @@ export default function ServicePage({
         <Partner partner={partner} />
       </section>
 
-      {/* Advantage Section */}
-      {/* <section className="bg-white py-20">
-        <div className="container">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-4xl font-bold mb-4">
-              {service?.advantage?.title}
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            {service?.advantage?.features.map((feature, index) => (
-              <div key={index} className="p-8 border rounded-lg">
-                <h3 className="text-2xl font-bold mb-2">{feature.title}</h3>
-                <p>{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
+      <HowItWorks service={service} />
 
-      {/* How it Works Section */}
-      <section className="py-20" id="service_how_it_works">
-        <div className="container">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-4xl font-bold mb-4">
-              {service?.howItWorks?.title}
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            {service?.howItWorks?.steps.map((step, index) => {
-              const Icon = iconMap[step.title] || ShieldCheck; // fallback icon if no match
-              const iconStyles = [
-                {
-                  bgColor: "bg-primary-100",
-                  textColor: "text-primary-600",
-                },
-                {
-                  bgColor: "bg-slate-100",
-                  textColor: "text-slate-600",
-                },
-                {
-                  bgColor: "bg-gray-100",
-                  textColor: "text-gray-600",
-                },
-                {
-                  bgColor: "bg-[#F4F3FF]",
-                  textColor: "text-[#7A5AF8]",
-                },
-                {
-                  bgColor: "bg-[#FFF6ED]",
-                  textColor: "text-[#FB6514]",
-                },
-              ];
-              const style = iconStyles[index % iconStyles.length];
-              return (
-                <div
-                  key={index}
-                  className="p-8 border rounded-2xl text-center shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <div className="flex justify-center mb-4">
-                    <div
-                      className={`p-4 rounded-full ${style.bgColor} ${style.textColor}`}>
-                      <Icon size={32} strokeWidth={1.5} />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="bg-white py-20 rounded-xl">
-        <div className="container">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-4xl font-bold mb-4">
-              {service?.testimonials?.title}
-            </h2>
-          </div>
-          <div className="mt-8">
-            <Slider {...testimonialSettings}>
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="px-4">
-                  <TestimonialCard testimonial={testimonial} />
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-      </section>
+      <Testimonials service={service} testimonials={testimonials} />
 
       {/* Pricing Section */}
       {/* <section className='py-20'>
