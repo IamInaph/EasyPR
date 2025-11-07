@@ -27,7 +27,7 @@ const BlogCard = (blogs) => {
           )}
           <div className="border border-slate-200 py-8 px-6 rounded-br-2xl rounded-bl-2xl flex flex-col gap-5">
             <div className="flex-col gap-3 flex">
-              <h3 className="text-2xl ">{blogItem.title}</h3>
+              <h3 className="text-2xl line-clamp-2 ">{blogItem.title}</h3>
             </div>
             <div className="flex items-center justify-between">
               <span className="pr-3 uppercase text-primary-400">
