@@ -104,7 +104,7 @@ export default function BlogSingle({ blogData, params, className }) {
           </figure>
           <div className="max-w-4xl mx-auto px-4">
             <article className="flex items-start gap-8">
-              <div className="blog-content max-sm:text-lg overflow-x-auto">
+              <div className="blog-content max-sm:text-lg overflow-x-auto text-justify">
                 <Markdown
                   rehypePlugins={[rehypeRaw, rehypeSanitize]}
                   components={{
