@@ -1,7 +1,6 @@
 "use client";
 import Layout from "@/components/Layout";
 import Faq from "@/templates/HomePage/Faq";
-import Plan from "@/templates/HomePage/Plan";
 import Started from "@/templates/HomePage/Started";
 import Partner from "@/templates/HomePage/Partner";
 import Hero from "./Hero";
@@ -86,16 +85,6 @@ export default function ServicePage({
       <HowItWorks service={service} />
 
       <Testimonials service={service} testimonials={testimonials} />
-
-      {/* Pricing Section */}
-      {/* <section className='py-20'>
-            <div className='container'>
-                {service?.pricing && <Plan plan={service?.pricing} />}
-                <div className='text-center mt-8'>
-                    <a href='#' className='btn btn-secondary'>Compare Pricings</a>
-                </div>
-            </div>
-        </section> */}
 
       {/* Final CTA Section */}
       <section className="bg-white py-20">
