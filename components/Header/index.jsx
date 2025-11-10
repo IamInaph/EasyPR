@@ -1,22 +1,34 @@
+"use client";
 
-'use client'
-
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
-import Logo from '@/components/Svg/Logo'
-import { Icon } from '@iconify/react'
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Logo from "@/components/Svg/Logo";
+import { Icon } from "@iconify/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { usePathname } from "next/navigation";
 import { ChevronDown, DownloadCloud } from "lucide-react";
 
 const Header = ({ plan }) => {
   const [orderId, setOrderId] = useState("");
   const [istop, setistop] = useState(true);
   const [isMainNavOpen, setIsMainNavOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState("Services");
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname === "/services/press-release-services-for-e-commerce") {
+      setSelectedService("Press Release Services for E-commerce");
+    } else if (pathname === "/services/press-release-services-for-startups") {
+      setSelectedService("Press Release Services for Startups");
+    } else {
+      setSelectedService("Services");
+    }
+  }, [pathname]);
 
   const listenScrollEvent = (e) => {
     if (window.scrollY > 40) {
@@ -101,11 +113,61 @@ const Header = ({ plan }) => {
                 </DropdownMenu>
               </div>
 
-              <div>
-                <Link className="nav-link" href="/services">
-                  Services
-                </Link>
-              </div>
+                            <div>
+
+                              <DropdownMenu>
+
+                                <DropdownMenuTrigger className="nav-link flex gap-1 items-center">
+
+                                  {selectedService}
+
+                                  <ChevronDown className="w-5 h-5" />
+
+                                </DropdownMenuTrigger>
+
+                                                  <DropdownMenuContent className="bg-white rounded-[8px] z-[999]">
+
+                                                    <DropdownMenuItem
+
+                                                      className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
+
+                                                      onClick={() =>
+
+                                                        setSelectedService("Press Release Services for E-commerce")
+
+                                                      }>
+
+                                                      <Link href="/services/press-release-services-for-e-commerce">
+
+                                                        Press Release Services for E-commerce
+
+                                                      </Link>
+
+                                                    </DropdownMenuItem>
+
+                                                    <DropdownMenuItem
+
+                                                      className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
+
+                                                      onClick={() =>
+
+                                                        setSelectedService("Press Release Services for Startups")
+
+                                                      }>
+
+                                                      <Link href="/services/press-release-services-for-startups">
+
+                                                        Press Release Services for Startups
+
+                                                      </Link>
+
+                                                    </DropdownMenuItem>
+
+                                                  </DropdownMenuContent>
+
+                              </DropdownMenu>
+
+                            </div>
               <div>
                 <Link className="nav-link" href="/contact">
                   Contact
