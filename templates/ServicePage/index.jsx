@@ -6,6 +6,7 @@ import Partner from "@/templates/HomePage/Partner";
 import Hero from "./Hero";
 import HowItWorks from "./HowItWorks";
 import Testimonials from "./Testimonials";
+import OrganicGrowth from "./OrganicGrowth";
 
 export default function ServicePage({
   serviceData,
@@ -81,6 +82,8 @@ export default function ServicePage({
         </div>
         <Partner partner={partner} />
       </section>
+
+      <OrganicGrowth service={service} />
 
       <HowItWorks service={service} />
 

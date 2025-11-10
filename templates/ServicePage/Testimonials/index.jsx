@@ -4,10 +4,15 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
+import { useEffect, useRef, useState } from "react";
 
-const TestimonialCard = ({ testimonial }) => {
+const TestimonialCard = ({ testimonial, isActive }) => {
   return (
-    <div className="p-8 border rounded-xl bg-white">
+    <div
+      className={`p-8 border rounded-xl bg-white ${
+        isActive ? "tab-active" : ""
+      }`}
+    >
       <div className="flex items-center mb-4">
         {[...Array(5)].map((_, i) => (
           <Icon
@@ -63,6 +68,19 @@ const PrevArrow = (props) => {
 };
 
 export default function Testimonials({ service, testimonials }) {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (sliderRef.current) {
+        const nextSlide = (activeSlide + 1) % testimonials.length;
+        sliderRef.current.slickGoTo(nextSlide);
+      }
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [activeSlide, testimonials.length]);
+
   const testimonialSettings = {
     dots: true,
     infinite: true,
@@ -71,6 +89,7 @@ export default function Testimonials({ service, testimonials }) {
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    afterChange: (current) => setActiveSlide(current),
     responsive: [
       {
         breakpoint: 1024,
@@ -96,10 +115,13 @@ export default function Testimonials({ service, testimonials }) {
           </h2>
         </div>
         <div className="mt-8">
-          <Slider {...testimonialSettings}>
+          <Slider {...testimonialSettings} ref={sliderRef}>
             {testimonials.map((testimonial, index) => (
               <div key={index} className="px-4">
-                <TestimonialCard testimonial={testimonial} />
+                <TestimonialCard
+                  testimonial={testimonial}
+                  isActive={index === activeSlide}
+                />
               </div>
             ))}
           </Slider>
