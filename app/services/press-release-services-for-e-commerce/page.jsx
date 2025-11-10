@@ -12,12 +12,12 @@ export async function generateMetadata() {
     title: serviceMeta?.metaTitle,
     description: serviceMeta?.metaDescription,
     alternates: {
-      canonical: "/services",
+      canonical: "/services/press-release-services-for-e-commerce",
     },
     openGraph: {
       type: "website",
       locale: "en_IE",
-      url: "https://easyprwire.com/services",
+      url: "https://easyprwire.com/services/press-release-services-for-e-commerce",
       siteName: "Easy PR",
     },
   };
