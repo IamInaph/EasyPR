@@ -10,7 +10,7 @@ const BlogCard = (blogs) => {
   // console.log("blog items", blogItem);
   return (
     <>
-      <Link href={"/blog/" + blogItem?.slug}>
+      <Link href={"/blogs/" + blogItem?.slug}>
         <div className="card hover:shadow-lg duration-300 ease-in-out">
           <div className="border border-slate-200 py-8 px-6 rounded-br-2xl rounded-bl-2xl flex flex-col gap-5">
             <div className="flex-col gap-3 flex">

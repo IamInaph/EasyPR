@@ -16,8 +16,12 @@ import {
 } from "react-share";
 import Head from "next/head";
 
-export default function BlogSingle({ blogData, params, className }) {
-  const shareUrl = "https://www.easyprwire.com/blog/";
+export default function BlogSingle({ blogData, params, className, allBlogs }) {
+  const shareUrl = "https://www.easyprwire.com/blogs/";
+
+  const filteredBlogs = allBlogs?.filter(
+    (blog) => blog.id !== blogData.id
+  ).slice(0, 3);
   
   return (
     <>
@@ -177,6 +181,25 @@ export default function BlogSingle({ blogData, params, className }) {
             </div>
           </div>
         </div>
+        <section>
+          <div className="container mx-auto">
+            <h2 className="text-center mb-6">Related Posts</h2>
+            <div className="grid grid-cols-3 gap-8">
+              {filteredBlogs &&
+                filteredBlogs.slice(0, 3).map((item, index) => (
+                  <div
+                    className="col-span-3 md:col-span-1"
+                    key={"blog" + index}>
+                    <BlogCard
+                      blogs={item}
+                      key={"blog home" + index}
+                      className=""
+                    />
+                  </div>
+                ))}
+            </div>
+          </div>
+        </section>
       </Layout>
     </>
   );

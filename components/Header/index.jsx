@@ -83,7 +83,7 @@ const Header = ({ plan }) => {
                 </Link>
               </div> */}
               <div>
-                <Link className="nav-link" href="/blog">
+                <Link className="nav-link" href="/blogs">
                   Blogs
                 </Link>
               </div>
@@ -113,61 +113,41 @@ const Header = ({ plan }) => {
                 </DropdownMenu>
               </div>
 
-                            <div>
+              <div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="nav-link flex gap-1 items-center">
+                    {selectedService}
 
-                              <DropdownMenu>
+                    <ChevronDown className="w-5 h-5" />
+                  </DropdownMenuTrigger>
 
-                                <DropdownMenuTrigger className="nav-link flex gap-1 items-center">
+                  <DropdownMenuContent className="bg-white rounded-[8px] z-[999]">
+                    <DropdownMenuItem
+                      className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
+                      onClick={() =>
+                        setSelectedService(
+                          "Press Release Services for E-commerce"
+                        )
+                      }>
+                      <Link href="/services/press-release-services-for-e-commerce">
+                        Press Release Services for E-commerce
+                      </Link>
+                    </DropdownMenuItem>
 
-                                  {selectedService}
-
-                                  <ChevronDown className="w-5 h-5" />
-
-                                </DropdownMenuTrigger>
-
-                                                  <DropdownMenuContent className="bg-white rounded-[8px] z-[999]">
-
-                                                    <DropdownMenuItem
-
-                                                      className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
-
-                                                      onClick={() =>
-
-                                                        setSelectedService("Press Release Services for E-commerce")
-
-                                                      }>
-
-                                                      <Link href="/services/press-release-services-for-e-commerce">
-
-                                                        Press Release Services for E-commerce
-
-                                                      </Link>
-
-                                                    </DropdownMenuItem>
-
-                                                    <DropdownMenuItem
-
-                                                      className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
-
-                                                      onClick={() =>
-
-                                                        setSelectedService("Press Release Services for Startups")
-
-                                                      }>
-
-                                                      <Link href="/services/press-release-services-for-startups">
-
-                                                        Press Release Services for Startups
-
-                                                      </Link>
-
-                                                    </DropdownMenuItem>
-
-                                                  </DropdownMenuContent>
-
-                              </DropdownMenu>
-
-                            </div>
+                    <DropdownMenuItem
+                      className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
+                      onClick={() =>
+                        setSelectedService(
+                          "Press Release Services for Startups"
+                        )
+                      }>
+                      <Link href="/services/press-release-services-for-startups">
+                        Press Release Services for Startups
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
               <div>
                 <Link className="nav-link" href="/contact">
                   Contact
