@@ -8,7 +8,7 @@ module.exports = {
 	priority: 0.7,
 	transform: async (config, path) => {
 		return {
-			loc: path, // The URL
+			loc: path,
 			changefreq: 'weekly',
 			priority: path === '/' ? 1.0 : 0.7,
 			lastmod: new Date().toISOString(),
@@ -20,7 +20,7 @@ module.exports = {
 			{
 				userAgent: '*',
 				allow: '/',
-				disallow: ['/message-confirmation', '/order/'],
+				disallow: ['/message-confirmation', '/order/', '/?_rsc='],
 			},
 		],
 		additionalSitemaps: ['https://easyprwire.com/sitemap.xml'],
