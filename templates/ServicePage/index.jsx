@@ -1,6 +1,6 @@
 "use client";
 import Layout from "@/components/Layout";
-import Faq from "@/templates/HomePage/Faq";
+import ServiceFaq from "./Faq";
 import Started from "@/templates/HomePage/Started";
 import Partner from "@/templates/HomePage/Partner";
 import Hero from "./Hero";
@@ -70,17 +70,17 @@ export default function ServicePage({
     },
   ];
 
-  console.log(homeData, faqs);
+  // console.log(homeData, faqs);
 
   return (
     <Layout plan={plan}>
       <Hero service={service} />
 
       <section>
-        <div className="container">
+        {/* <div className="container">
           <h2 className="text-center"> Trusted By 1000+ Companies WorldWide</h2>
-        </div>
-        <Partner partner={partner} />
+        </div> */}
+        <Partner partner={partner} isServicePage={true} />
       </section>
 
       <OrganicGrowth service={service} />
@@ -100,7 +100,7 @@ export default function ServicePage({
 
       {/* FAQ Section */}
       <section className="py-20">
-        <div className="container">{faqs && <Faq faqs={faqs} />}</div>
+        <div className="container">{faqs && <ServiceFaq faqs={faqs} />}</div>
       </section>
     </Layout>
   );

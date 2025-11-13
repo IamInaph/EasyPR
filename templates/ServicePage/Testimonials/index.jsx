@@ -14,6 +14,13 @@ const TestimonialCard = ({ testimonial, isActive }) => {
       }`}
     >
       <div className="flex items-center mb-4">
+        <Image
+          src="/assets/Trustpilot.jpg"
+          alt="Trustpilot"
+          width={100} // Adjust width as needed
+          height={20} // Adjust height as needed
+          className="mr-2"
+        />
         {[...Array(5)].map((_, i) => (
           <Icon
             key={i}

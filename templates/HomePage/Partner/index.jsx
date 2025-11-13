@@ -4,16 +4,22 @@ import Link from "next/link";
 import { getStrapiMedia } from "@/utils/media";
 import Marquee from "react-fast-marquee";
 
-export default function Partner({ partner }) {
+export default function Partner({ partner, isServicePage }) {
   // console.log("partners", partner);
 
   return (
     <>
       <section>
         <div className="container text-center">
-          <h2 className="text-lg font-normal text-gray-400 mb-10">
-            {partner?.section.name}
-          </h2>
+          {isServicePage ? (
+            <h2 className="text-2xl font-bold mb-10">
+              {partner?.section.name}
+            </h2>
+          ) : (
+            <h2 className="text-lg font-normal text-gray-400 mb-10">
+              {partner?.section.name}
+            </h2>
+          )}
         </div>
         <div className=" block">
           <Marquee>
