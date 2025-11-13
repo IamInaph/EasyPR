@@ -1,9 +1,9 @@
 import ServicePage from "@/templates/ServicePage";
-import { getStartupServicePageData } from "@/services/startupService";
+import { getRealEstateServicePageData } from "@/services/realEstateService";
 import { getHomepageData } from "@/services/homepage";
 
 export async function generateMetadata() {
-  const serviceData = await getStartupServicePageData();
+  const serviceData = await getRealEstateServicePageData();
   const serviceMeta = serviceData?.data?.data?.attributes?.seo;
 
   return {
@@ -11,19 +11,19 @@ export async function generateMetadata() {
     title: serviceMeta?.metaTitle,
     description: serviceMeta?.metaDescription,
     alternates: {
-      canonical: "/services/press-release-services-for-startups",
+      canonical: "/services/press-release-services-for-real-estate",
     },
     openGraph: {
       type: "website",
       locale: "en_IE",
-      url: "https://easyprwire.com/services/press-release-services-for-startups",
+      url: "https://easyprwire.com/services/press-release-services-for-real-estate",
       siteName: "Easy PR",
     },
   };
 }
 
 export default async function Service() {
-  const serviceData = await getStartupServicePageData();
+  const serviceData = await getRealEstateServicePageData();
   const homeData = await getHomepageData();
 
   const partner = homeData.data.data.attributes.content.filter((content) => {

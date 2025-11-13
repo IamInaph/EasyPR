@@ -20,15 +20,37 @@ const Header = ({ plan }) => {
   const [selectedService, setSelectedService] = useState("Services");
   const pathname = usePathname();
 
+  const services = [
+    {
+      title: "Press Release Distribution Services For SaaS",
+      href: "/services/press-release-services-for-saas",
+    },
+    {
+      title: "Press Release Distribution Services For Fintech",
+      href: "/services/press-release-services-for-fintech",
+    },
+    {
+      title: "Press Release Distribution Services For Real Estate",
+      href: "/services/press-release-services-for-real-estate",
+    },
+    {
+      title: "Press Release Distribution Services For Ecommerce Brands",
+      href: "/services/press-release-services-for-ecommerce-brands",
+    },
+    {
+      title: "Press Release Distribution Services For Startups",
+      href: "/services/press-release-services-for-startups",
+    },
+  ];
+
   useEffect(() => {
-    if (pathname === "/services/press-release-services-for-e-commerce") {
-      setSelectedService("Press Release Services for E-commerce");
-    } else if (pathname === "/services/press-release-services-for-startups") {
-      setSelectedService("Press Release Services for Startups");
+    const currentService = services.find((service) => service.href === pathname);
+    if (currentService) {
+      setSelectedService(currentService.title);
     } else {
       setSelectedService("Services");
     }
-  }, [pathname]);
+  }, [pathname, services]);
 
   const listenScrollEvent = (e) => {
     if (window.scrollY > 40) {
@@ -122,29 +144,15 @@ const Header = ({ plan }) => {
                   </DropdownMenuTrigger>
 
                   <DropdownMenuContent className="bg-white rounded-[8px] z-[999]">
-                    <DropdownMenuItem
-                      className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
-                      onClick={() =>
-                        setSelectedService(
-                          "Press Release Services for E-commerce"
-                        )
-                      }>
-                      <Link href="/services/press-release-services-for-e-commerce">
-                        Press Release Services for E-commerce
-                      </Link>
-                    </DropdownMenuItem>
-
-                    <DropdownMenuItem
-                      className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
-                      onClick={() =>
-                        setSelectedService(
-                          "Press Release Services for Startups"
-                        )
-                      }>
-                      <Link href="/services/press-release-services-for-startups">
-                        Press Release Services for Startups
-                      </Link>
-                    </DropdownMenuItem>
+                    {services.map((service) => (
+                      <DropdownMenuItem
+                        key={service.href}
+                        className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
+                        onClick={() => setSelectedService(service.title)}
+                      >
+                        <Link href={service.href}>{service.title}</Link>
+                      </DropdownMenuItem>
+                    ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>
