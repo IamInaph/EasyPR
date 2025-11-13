@@ -5,12 +5,10 @@ import { Icon } from "@iconify/react";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
-import { getStrapiMedia } from "@/utils/media";
 const Layout = dynamic(() => import("@/components/Layout"));
 const BlogCard = dynamic(() => import("@/components/BlogCard"));
 import { format } from "date-fns";
 
-import Image from "next/image";
 import {
   FacebookShareButton,
   LinkedinShareButton,
@@ -18,18 +16,13 @@ import {
 } from "react-share";
 import Head from "next/head";
 
-export default function BlogSingle({ blogData, params, className }) {
-  const shareUrl = "https://www.easyprwire.com/blog/";
-  const blogPageData = blogData.data.attributes.blogs.data;
-  const currentBlog = blogPageData?.find(
-    (item) => item.attributes.slug === params.slug
-  );
-  const filteredBlogs = blogPageData?.filter(
-    (item) => item.attributes.slug !== params.slug
-  );
+export default function BlogSingle({ blogData, params, className, allBlogs }) {
+  const shareUrl = "https://www.easyprwire.com/blogs/";
 
-  console.log(blogData);
-
+  const filteredBlogs = allBlogs?.filter(
+    (blog) => blog.id !== blogData.id
+  ).slice(0, 3);
+  
   return (
     <>
       <Layout>
@@ -39,19 +32,19 @@ export default function BlogSingle({ blogData, params, className }) {
               <div className="flex gap-4 justify-center text-xl max-sm:text-sm">
                 <div>
                   {format(
-                    new Date(currentBlog?.attributes.publishedAt),
+                    new Date(blogData?.attributes.publishedAt),
                     "d MMM yyy"
                   )}
                 </div>
                 <div>|</div>
                 <div>
-                  {currentBlog.attributes.readableInMinutes || 5} min read
+                  {blogData.attributes.readableInMinutes || 5} min read
                 </div>
                 <div>|</div>
                 <div>Marketing</div>
               </div>
               <h1 className="text-6xl mt-2 leading-tight max-sm:text-2xl">
-                {currentBlog.attributes.title}
+                {blogData.attributes.title}
               </h1>
               <div className="flex gap-4 justify-center mt-8">
                 <div className="h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center">
@@ -92,19 +85,9 @@ export default function BlogSingle({ blogData, params, className }) {
           </div>
         </section>
         <div className="max-w-5xl mx-auto mt-12">
-          <figure className="relative min-w-[10rem] block -mt-[10rem] sm:-mt-[20rem] mb-12">
-            <Image
-              src={getStrapiMedia(currentBlog?.attributes?.image?.media)}
-              height={2000}
-              width={2000}
-              priority
-              className="object-cover !aspect-auto"
-              alt={currentBlog?.attributes.image.alt}
-            />
-          </figure>
           <div className="max-w-4xl mx-auto px-4">
             <article className="flex items-start gap-8">
-              <div className="blog-content max-sm:text-lg overflow-x-auto">
+              <div className="blog-content max-sm:text-lg overflow-x-auto text-justify">
                 <Markdown
                   rehypePlugins={[rehypeRaw, rehypeSanitize]}
                   components={{
@@ -149,7 +132,7 @@ export default function BlogSingle({ blogData, params, className }) {
                       />
                     ),
                   }}>
-                  {currentBlog.attributes.content}
+                  {blogData.attributes.content}
                 </Markdown>
               </div>
             </article>
@@ -198,7 +181,6 @@ export default function BlogSingle({ blogData, params, className }) {
             </div>
           </div>
         </div>
-
         <section>
           <div className="container mx-auto">
             <h2 className="text-center mb-6">Related Posts</h2>

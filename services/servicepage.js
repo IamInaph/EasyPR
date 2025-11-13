@@ -29,28 +29,29 @@ export async function getServicePageData() {
               "Company 5",
             ],
           },
-          advantage: {
-            title:
-              "Stop Wasting Ad Spend: The E-commerce PR Advantage is Organic Growth.",
-            features: [
-              {
-                title: "H3",
-                description: "Short Description",
-              },
-              {
-                title: "H3",
-                description: "Short Description",
-              },
-              {
-                title: "H3",
-                description: "Short Description",
-              },
-              {
-                title: "H3",
-                description: "Short Description",
-              },
-            ],
-          },
+          organicGrowthTitle:
+            "Stop Wasting Ad Spend: The E-commerce PR Advantage is Organic Growth.",
+          organicGrowth: [
+            {
+              title: "Test Title",
+              description:
+                "Short Description Short Description Short Description Short Description Short Description Short Description",
+            },
+            {
+              title: "Test Title",
+              description:
+                "Short Description Short Description Short Description",
+            },
+            {
+              title: "Test Title",
+              description:
+                "Short Description Short Description Short Description Short Description Short Description",
+            },
+            {
+              title: "Test Title",
+              description: "Short Description",
+            },
+          ],
           howItWorks: {
             title: "How EasyPr Can Help?",
             steps: [

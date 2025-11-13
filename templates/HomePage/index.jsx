@@ -61,14 +61,13 @@ export default function HomePage({ homeData }) {
       <Layout plan={plan[0]}>
         <Hero hero={hero[0]} />
         <Partner partner={partner[0]} />
-        <Feature feature={feature[0]} />
-        <Plan plan={plan[0]} />
-        <Process process={process[0]} growBrand={growBrand[0]} />
-        <Network network={network[0]} outlet={outlet[0]} />
-        <Offer content={moneyBack[0]} marketingContent={marketDisc[0]} />
-        {/* <Review feedback={feedback[0]} /> */}
+        {/* <Feature feature={feature[0]} /> */}
+        {/* <Plan plan={plan[0]} /> */}
+        {/* <Process process={process[0]} growBrand={growBrand[0]} /> */}
+        {/* <Network network={network[0]} outlet={outlet[0]} /> */}
+        {/* <Offer content={moneyBack[0]} marketingContent={marketDisc[0]} /> */}
         <Faq faqs={faqs[0]} />
-        <Started getStarted={getStarted[0]} />
+        {/* <Started getStarted={getStarted[0]} /> */}
       </Layout>
     </>
   );

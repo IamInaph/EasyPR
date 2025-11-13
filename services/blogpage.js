@@ -1,14 +1,39 @@
-import axiosInstance from '@/utils/axios'
+import axios from "axios";
+import axiosInstance from "@/utils/axios";
+
+const newApi = axios.create({
+  baseURL: "https://admin.easyprwire.xyz/api",
+  timeout: 5000,
+});
+
+// export const getBlogData = async () => {
+// 	try {
+// 		const response = await axiosInstance.get('/blog-page/?populate=deep')
+
+// 		return response
+// 	} catch (error) {
+// 		throw error
+// 	}
+// }
 
 export const getBlogData = async () => {
-	try {
-		const response = await axiosInstance.get('/blog-page/?populate=deep')
+  try {
+    const response = await newApi.get("/blogs");
 
-		return response
-	} catch (error) {
-		throw error
-	}
-}
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getBlogBySlug = async (slug) => {
+  try {
+    const response = await newApi.get(`/blogs?filters[slug][$eq]=${slug}&populate=*`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const getBlogSEOData = async () => {
 	try {

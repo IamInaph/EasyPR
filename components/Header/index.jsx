@@ -1,22 +1,56 @@
+"use client";
 
-'use client'
-
-import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
-import Logo from '@/components/Svg/Logo'
-import { Icon } from '@iconify/react'
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Logo from "@/components/Svg/Logo";
+import { Icon } from "@iconify/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { usePathname } from "next/navigation";
 import { ChevronDown, DownloadCloud } from "lucide-react";
 
 const Header = ({ plan }) => {
   const [orderId, setOrderId] = useState("");
   const [istop, setistop] = useState(true);
   const [isMainNavOpen, setIsMainNavOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState("Services");
+  const pathname = usePathname();
+
+  const services = [
+    {
+      title: "Press Release Distribution Services For SaaS",
+      href: "/services/press-release-services-for-saas",
+    },
+    {
+      title: "Press Release Distribution Services For Fintech",
+      href: "/services/press-release-services-for-fintech",
+    },
+    {
+      title: "Press Release Distribution Services For Real Estate",
+      href: "/services/press-release-services-for-real-estate",
+    },
+    {
+      title: "Press Release Distribution Services For Ecommerce Brands",
+      href: "/services/press-release-services-for-ecommerce-brands",
+    },
+    {
+      title: "Press Release Distribution Services For Startups",
+      href: "/services/press-release-services-for-startups",
+    },
+  ];
+
+  useEffect(() => {
+    const currentService = services.find((service) => service.href === pathname);
+    if (currentService) {
+      setSelectedService(currentService.title);
+    } else {
+      setSelectedService("Services");
+    }
+  }, [pathname, services]);
 
   const listenScrollEvent = (e) => {
     if (window.scrollY > 40) {
@@ -71,7 +105,7 @@ const Header = ({ plan }) => {
                 </Link>
               </div> */}
               <div>
-                <Link className="nav-link" href="/blog">
+                <Link className="nav-link" href="/blogs">
                   Blogs
                 </Link>
               </div>
@@ -102,9 +136,25 @@ const Header = ({ plan }) => {
               </div>
 
               <div>
-                <Link className="nav-link" href="/services">
-                  Services
-                </Link>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="nav-link flex gap-1 items-center">
+                    {selectedService}
+
+                    <ChevronDown className="w-5 h-5" />
+                  </DropdownMenuTrigger>
+
+                  <DropdownMenuContent className="bg-white rounded-[8px] z-[999]">
+                    {services.map((service) => (
+                      <DropdownMenuItem
+                        key={service.href}
+                        className="flex flex-row justify-between gap-2 items-center group cursor-pointer"
+                        onClick={() => setSelectedService(service.title)}
+                      >
+                        <Link href={service.href}>{service.title}</Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
               <div>
                 <Link className="nav-link" href="/contact">

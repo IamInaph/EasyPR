@@ -36,6 +36,5 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const homeData = await getHomepageData();
-
   return <HomePage homeData={homeData.data} />;
 }
