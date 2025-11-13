@@ -23,7 +23,6 @@ module.exports = {
 				disallow: ['/message-confirmation', '/order/', '/?_rsc='],
 			},
 		],
-		additionalSitemaps: ['https://easyprwire.com/sitemap.xml'],
 	},
 	additionalPaths: async (config) => {
 		const blogs = await fetch(
