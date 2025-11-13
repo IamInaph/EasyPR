@@ -639,7 +639,7 @@ const OrderWizardPage = ({ orderDetail }) => {
 											Allowed file type: .doc, .pdf and .docx
 										</small>
 									</div>
-									<div className='form-control flex-1'>
+									{/* <div className='form-control flex-1'>
 										<label>Upload your Images(Optional - Max 10)</label>
 										<div className='file-upload' type='button'>
 											{uploadedImages.length ? (
@@ -693,7 +693,7 @@ const OrderWizardPage = ({ orderDetail }) => {
 										<small className='mt-2 text-base text-right text-gray-400 '>
 											Allowed file type: .png, .jpeg
 										</small>
-									</div>
+									</div> */}
 								</div>
 								<div className='flex justify-end mb-5'>
 									<div />
