@@ -8,7 +8,7 @@ const Started = dynamic(() => import("./Started"));
 const Faq = dynamic(() => import("./Faq"));
 const Process = dynamic(() => import("./Process"));
 const Network = dynamic(() => import("./Network"));
-const Plan = dynamic(() => import("./Plan"));
+const Plan = dynamic(() => import('@/templates/ServicePage/Plan'))
 const Partner = dynamic(() => import("./Partner"));
 const Review = dynamic(() => import("./Review"));
 const Offer = dynamic(() => import("./Offer"));

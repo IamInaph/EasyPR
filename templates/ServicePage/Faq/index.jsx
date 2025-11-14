@@ -14,14 +14,9 @@ export default function ServiceFaq({ faqs }) {
       <section className="bg-slate-50 faq-section" id="faq">
         <div className="container mx-auto">
           <div className="text-center">
-            <h2 className="text-4xl font-bold mb-4">QUESTIONS ANSWERED</h2>
-            <h3 className="text-2xl mb-4">
-              Questions About Press Release Services? We're Here to Help
-            </h3>
-            <p className="mb-8">
-              Find answers about how it works, what’s included, and what to
-              expect when you publish with us.
-            </p>
+            <h2 className="text-4xl font-bold mb-4">
+              Frequently Asked Questions
+            </h2>
           </div>
           <div className="mt-12">
             {faqData.map((item, index) => {
@@ -32,8 +27,7 @@ export default function ServiceFaq({ faqs }) {
                     className={`${isTabOpen ? "active" : " "} accordion`}
                     onClick={() => {
                       setOpenTab(isTabOpen ? null : index);
-                    }}
-                  >
+                    }}>
                     <div className="accordion-title ">
                       {item.attributes.question}
                       <div>

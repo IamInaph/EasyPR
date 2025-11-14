@@ -11,15 +11,14 @@ const TestimonialCard = ({ testimonial, isActive }) => {
     <div
       className={`p-8 border rounded-xl bg-white ${
         isActive ? "tab-active" : ""
-      }`}
-    >
+      }`}>
       <div className="flex items-center mb-4">
         <Image
           src="/assets/Trustpilot.jpg"
           alt="Trustpilot"
           width={100} // Adjust width as needed
           height={20} // Adjust height as needed
-          className="mr-2"
+          className="mr-2 rounded-[3px]"
         />
         {[...Array(5)].map((_, i) => (
           <Icon
@@ -55,8 +54,7 @@ const NextArrow = (props) => {
   return (
     <div
       className={`${className} absolute top-1/2 -translate-y-1/2 right-4 z-10 cursor-pointer bg-white/30 backdrop-blur-sm rounded-full p-2`}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <ChevronRight className="h-6 w-6 text-black" />
     </div>
   );
@@ -67,8 +65,7 @@ const PrevArrow = (props) => {
   return (
     <div
       className={`${className} absolute top-1/2 -translate-y-1/2 left-4 z-10 cursor-pointer bg-white/30 backdrop-blur-sm rounded-full p-2`}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <ChevronLeft className="h-6 w-6 text-black" />
     </div>
   );

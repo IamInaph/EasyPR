@@ -29,48 +29,54 @@ export default function Outlets({ plan }) {
           {plan?.includedOutlets.data.map((item, index) => {
             return (
               <div
-                className="flex"
+                className="grid grid-cols-10 gap-2 w-full"
                 key={`overview-topic-` + index + new Date().toString()}
               >
-                <div className="table-item max-w-[26rem] w-full flex items-center gap-3">
-                  <span> {item.attributes.name} </span>
-                  {item?.attributes?.image && (
-                    <figure className="relative min-h-8 min-w-24">
-                      <Image
-                        src={getStrapiMedia(item?.attributes?.image?.media)}
-                        fill
-                        sizes="100vh"
-                        priority
-                        className="object-contain"
-                        alt={item?.attributes?.image?.alt || "Image"}
-                      />
-                    </figure>
-                  )}
-                </div>
-                {plan?.pricingPlan.plans.data.map((newItem, index) => {
-                  const findData = newItem?.attributes.majorOutlets.find(
-                    (dataItem) =>
-                      dataItem.newsOutlet.data
-                        ? dataItem.newsOutlet.data.id === item.id
-                        : false
-                  );
-                  return (
-                    <div
-                      key={`outlets-` + index + new Date().toString()}
-                      className=" table-item max-w-[13.5rem] w-full"
-                    >
-                      {findData?.isAvailable ? (
-                        <Icon icon="charm:tick" color="#32d583" height={24} />
-                      ) : (
-                        <Icon
-                          icon="radix-icons:cross-2"
-                          color="#f04438"
-                          height={24}
+                <div className="lg:col-span-3 col-span-10">
+                  <div className="table-item flex items-center gap-3">
+                    <span> {item.attributes.name} </span>
+                    {item?.attributes?.image && (
+                      <figure className="relative min-h-8 min-w-24">
+                        <Image
+                          src={getStrapiMedia(item?.attributes?.image?.media)}
+                          fill
+                          sizes="100vh"
+                          priority
+                          className="object-contain"
+                          alt={item?.attributes?.image?.alt || "Image"}
                         />
-                      )}
-                    </div>
-                  );
-                })}
+                      </figure>
+                    )}
+                  </div>
+                </div>
+                <div className="lg:col-span-7 col-span-10">
+                  <div className="grid lg:grid-cols-4 gap-3">
+                    {plan?.pricingPlan.plans.data.map((newItem, index) => {
+                      const findData = newItem?.attributes.majorOutlets.find(
+                        (dataItem) =>
+                          dataItem.newsOutlet.data
+                            ? dataItem.newsOutlet.data.id === item.id
+                            : false
+                      );
+                      return (
+                        <div
+                          key={`outlets-` + index + new Date().toString()}
+                          className=" table-item"
+                        >
+                          {findData?.isAvailable ? (
+                            <Icon icon="charm:tick" color="#32d583" height={24} />
+                          ) : (
+                            <Icon
+                              icon="radix-icons:cross-2"
+                              color="#f04438"
+                              height={24}
+                            />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             );
           })}
