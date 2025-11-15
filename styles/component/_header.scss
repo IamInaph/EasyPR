@@ -21,7 +21,7 @@ header {
   }
 }
 .menu-button {
-  @apply fixed bottom-0 left-0 w-full z-50 p-3 border-t flex-row bg-white  min-w-[22rem] justify-end flex gap-2;
+  @apply fixed bottom-0 left-0 w-full z-50 p-3 border-t flex-row bg-white  min-w-[22rem] justify-end flex gap-2 items-center;
   .btn-main {
     @apply w-full;
   }

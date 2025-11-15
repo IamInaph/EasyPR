@@ -59,12 +59,14 @@ export default function Hero({ hero }) {
               <div className="flex lg:flex-row flex-col gap-4 items-center">
                 <Link
                   href="/#pricing-plan"
-                  className="btn btn-primary btn-lg lg:w-64 w-full">
+                  className="btn btn-primary lg:w-64 w-full"
+                  style={{paddingTop: '1rem', paddingBottom: '1rem', paddingLeft: '1.75rem', paddingRight: '1.75rem'}}>
                   Order Now
                 </Link>
                 <Link
                   href="/#plan"
-                  className="btn btn-outline btn-lg lg:w-64 w-full">
+                  className="btn btn-outline lg:w-64 w-full"
+                  style={{paddingTop: '1rem', paddingBottom: '1rem', paddingLeft: '1.75rem', paddingRight: '1.75rem'}}>
                   Our Plan &amp; Pricing
                 </Link>
               </div>

@@ -78,9 +78,6 @@ export default function ServicePage({
       <Hero service={service} />
 
       <section>
-        {/* <div className="container">
-          <h2 className="text-center"> Trusted By 1000+ Companies WorldWide</h2>
-        </div> */}
         <Partner partner={partner} isServicePage={true} />
       </section>
 

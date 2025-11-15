@@ -31,18 +31,18 @@ const TestimonialCard = ({ testimonial, isActive }) => {
 
       <p>{testimonial.review}</p>
       <div className="flex items-center">
-        <Image
+        {/* <Image
           src={testimonial.reviewer.imageUrl}
           width={50}
           height={50}
           alt={testimonial.reviewer.name}
           className="rounded-full mr-4"
-        />
+        /> */}
         <div>
           <p className="mb-2">{testimonial.reviewer.name}</p>
-          <p className="text-sm text-gray-500">
+          {/* <p className="text-sm text-gray-500">
             {testimonial.reviewer.designation}
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

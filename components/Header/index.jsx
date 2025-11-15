@@ -161,15 +161,15 @@ const Header = ({ plan }) => {
                 </Link>
               </div>
             </nav>
-            <div className=" menu-button">
+            <div className=" menu-button items-center">
               <div className="w-full lg:w-fit">
                 <button
-                  className="rounded-full btn btn-outline btn-main w-[155.6px]"
+                  className="rounded-full btn btn-outline btn-main w-[155.6px] flex items-center justify-center gap-2"
                   onClick={() =>
                     document.getElementById("my_modal_2").showModal()
                   }>
                   <Icon icon="lucide:box" height={24} />
-                  Order Status
+                  <span>Order Status</span>
                 </button>
                 <dialog id="my_modal_2" className="modal">
                   <div className="bg-white modal-box">
@@ -198,11 +198,11 @@ const Header = ({ plan }) => {
                   </div>
                 </dialog>
               </div>
-              <div className="w-full lg:w-fit">
+              <div className="w-full lg:w-fit ml-0 lg:ml-2">
                 <Link
                   href="/#pricing-plan"
-                  className="rounded-full btn btn-primary btn-main w-[155.6px]">
-                  Order Now
+                  className="rounded-full btn btn-primary btn-main w-[155.6px] flex items-center justify-center gap-2">
+                  <span>Order Now</span>
                   <Icon icon="bi:arrow-right" height={24} />
                 </Link>
               </div>

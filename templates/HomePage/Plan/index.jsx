@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 import PlanReport from "./PlanReport";
 
 const PlanType = dynamic(() => import("./PlanType"));
@@ -10,7 +11,7 @@ const Overview = dynamic(() => import("./Overview"));
 const Outlets = dynamic(() => import("./Outlets"));
 const Topics = dynamic(() => import("./Topics"));
 
-export default function Plan({ plan, indiePage = false }) {
+export default function Plan({ plan, indiePage = false, hideTopics = false }) {
   const [isSmall, setIsSmall] = useState(false);
   const topicsRef = useRef(null);
 
@@ -53,9 +54,19 @@ export default function Plan({ plan, indiePage = false }) {
             <WritingPlan plan={plan} />
             <Overview plan={plan} />
             <Outlets plan={plan} />
-            <div ref={topicsRef}>
-              <Topics plan={plan} />
-            </div>
+            {hideTopics ? (
+              <div className="flex justify-center mt-8">
+                <Link
+                  href="/pricings"
+                  className="btn btn-outline btn-lg w-full md:w-1/4 text-center">
+                  Compare Pricings
+                </Link>
+              </div>
+            ) : (
+              <div ref={topicsRef}>
+                <Topics plan={plan} />
+              </div>
+            )}
           </div>
         </div>
       </section>
