@@ -4,7 +4,8 @@ import { getBlogBySlug, getBlogData } from "@/services/blogpage";
 
 export async function generateMetadata({ params }) {
   const blogData = await getBlogBySlug(params.slug);
-  const currentBlog = blogData.data.data[0];
+  const currentBlog = blogData.data.blogs[0];
+  const seo = blogData.data.seo;
 
   if (!currentBlog) {
     return {
@@ -13,25 +14,15 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  // const seo = currentBlog.attributes.seo
-
   const imageUrl =
-    // currentBlog.attributes.image?.url ||
-    "https://res.cloudinary.com/dbhgrickp/image/upload/v1720070017/website-opener_na7bu9.jpg";
-
-  // const imageList = currentBlog?.attributes?.seo?.metaImage?.media?.data
-
-  // const ogImages = imageList?.map((img) => ({
-  // 	url: process?.env?.NEXT_PUBLIC_API_URL + img?.attributes?.url,
-  // 	width: img?.attributes?.width,
-  // 	height: img?.attributes?.height,
-  // 	alt: img?.attributes?.alternativeText || img?.attributes?.name,
-  // }))
+    currentBlog.banner_image
+      ? process?.env?.NEXT_PUBLIC_API_URL + currentBlog.banner_image
+      : "https://res.cloudinary.com/dbhgrickp/image/upload/v1720070017/website-opener_na7bu9.jpg";
 
   return {
     metadataBase: new URL("https://easyprwire.com"),
-    title: currentBlog.attributes.title,
-    description: "Read the full article on EasyPRWire.",
+    title: seo.meta_title || currentBlog.title,
+    description: seo.meta_description || "Read the full article on EasyPRWire.",
     alternates: {
       canonical: `/blogs/${params.slug}`,
     },
@@ -40,15 +31,15 @@ export async function generateMetadata({ params }) {
       locale: "en_IE",
       url: `https://easyprwire.com/blogs/${params.slug}`,
       siteName: "Easy PR",
-      title: currentBlog.attributes.title,
-      description: "Read the full article on EasyPRWire.",
-      // images: ogImages,
+      title: seo.meta_title || currentBlog.title,
+      description: seo.meta_description || "Read the full article on EasyPRWire.",
+      images: [imageUrl],
     },
     twitter: {
       site: "@easyprco",
       cardType: "summary_large_image",
-      title: currentBlog.attributes.title,
-      description: "Read the full article on EasyPRWire.",
+      title: seo.meta_title || currentBlog.title,
+      description: seo.meta_description || "Read the full article on EasyPRWire.",
       images: [imageUrl],
     },
   };
@@ -61,9 +52,9 @@ export default async function Post({ params }) {
   return (
     <>
       <BlogSingle
-        blogData={blogData.data.data[0]}
+        blogData={blogData.data.blogs[0]}
         params={params}
-        allBlogs={allBlogsData.data.data}
+        allBlogs={allBlogsData.data.blogs}
       />
     </>
   );

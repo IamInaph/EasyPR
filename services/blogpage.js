@@ -2,7 +2,7 @@ import axios from "axios";
 import axiosInstance from "@/utils/axios";
 
 const newApi = axios.create({
-  baseURL: "https://admin.easyprwire.xyz/api",
+  baseURL: "https://easypr.myastrosign.com/api",
   timeout: 5000,
 });
 
@@ -28,7 +28,9 @@ export const getBlogData = async () => {
 
 export const getBlogBySlug = async (slug) => {
   try {
-    const response = await newApi.get(`/blogs?filters[slug][$eq]=${slug}&populate=*`);
+    const response = await newApi.get(
+      `/blogs?filters[slug][$eq]=${slug}&populate=*`
+    );
     return response;
   } catch (error) {
     throw error;
@@ -36,11 +38,11 @@ export const getBlogBySlug = async (slug) => {
 };
 
 export const getBlogSEOData = async () => {
-	try {
-		const response = await axiosInstance.get('/blogs?populate=*')
+  try {
+    const response = await axiosInstance.get("/blogs?populate=*");
 
-		return response
-	} catch (error) {
-		throw error
-	}
-}
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
