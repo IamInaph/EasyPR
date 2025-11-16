@@ -161,51 +161,51 @@ const Header = ({ plan }) => {
                 </Link>
               </div>
               <div className=" menu-button items-center">
-              <div className="w-full lg:w-fit">
-                <button
-                  className="rounded-full btn btn-outline btn-sm btn-main flex gap-2 h-12"
-                  onClick={() =>
-                    document.getElementById("my_modal_2").showModal()
-                  }>
-                  <Icon icon="lucide:box" height={24} />
-                  <span>Order Status</span>
-                </button>
-                <dialog id="my_modal_2" className="modal">
-                  <div className="bg-white modal-box">
-                    <form method="dialog" className="modal-backdrop">
-                      <button className="absolute w-10 h-10 p-2 bg-white border-0 rounded-full btn btn-icon btn-sm  right-2 top-2 ">
-                        <Icon icon="radix-icons:cross-2" height={24} />
-                      </button>
-                    </form>
-                    <h3 className="text-2xl">Order Status</h3>
-                    <div className=" mb-3 mt-8">
-                      Please fill the Order ID provided in the email
+                <div className="w-full lg:w-fit">
+                  <button
+                    className="rounded-full btn btn-outline btn-sm btn-main flex gap-2 h-12 px-[20px]"
+                    onClick={() =>
+                      document.getElementById("my_modal_2").showModal()
+                    }>
+                    <Icon icon="lucide:box" height={24} />
+                    <span className="text-sm font-medium">Order Status</span>
+                  </button>
+                  <dialog id="my_modal_2" className="modal">
+                    <div className="bg-white modal-box">
+                      <form method="dialog" className="modal-backdrop">
+                        <button className="absolute w-10 h-10 p-2 bg-white border-0 rounded-full btn btn-icon btn-sm  right-2 top-2 ">
+                          <Icon icon="radix-icons:cross-2" height={24} />
+                        </button>
+                      </form>
+                      <h3 className="text-2xl ">Order Status</h3>
+                      <div className=" mb-3 mt-8">
+                        Please fill the Order ID provided in the email
+                      </div>
+                      <form method="dialog" className="relative">
+                        <input
+                          onChange={handleChange}
+                          type="text"
+                          placeholder="Order ID #213-WA233F"
+                          className="w-full rounded-full input input-bordered"
+                        />
+                        <Link
+                          href={`/order/track-status?orderId=${orderId}`}
+                          className="absolute w-10 h-10 p-2 rounded-full btn btn-sm btn-ghost bg-slate-50 right-1 top-1 ">
+                          <Icon icon="bi:arrow-right" height={24} />
+                        </Link>
+                      </form>
                     </div>
-                    <form method="dialog" className="relative">
-                      <input
-                        onChange={handleChange}
-                        type="text"
-                        placeholder="Order ID #213-WA233F"
-                        className="w-full rounded-full input input-bordered"
-                      />
-                      <Link
-                        href={`/order/track-status?orderId=${orderId}`}
-                        className="absolute w-10 h-10 p-2 rounded-full btn btn-sm btn-ghost bg-slate-50 right-1 top-1 ">
-                        <Icon icon="bi:arrow-right" height={24} />
-                      </Link>
-                    </form>
-                  </div>
-                </dialog>
+                  </dialog>
+                </div>
+                <div className="w-full lg:w-fit">
+                  <Link
+                    href="/#pricing-plan"
+                    className="rounded-full btn btn-primary btn-sm btn-main flex gap-2 h-12 px-[20px]">
+                    <span className="text-sm font-medium">Order Now</span>
+                    <Icon icon="bi:arrow-right" height={24} />
+                  </Link>
+                </div>
               </div>
-              <div className="w-full lg:w-fit">
-                <Link
-                  href="/#pricing-plan"
-                  className="rounded-full btn btn-primary btn-sm btn-main flex gap-2 h-12">
-                  <span>Order Now</span>
-                  <Icon icon="bi:arrow-right" height={24} />
-                </Link>
-              </div>
-            </div>
             </nav>
             <div
               className="lg:hidden block fixed top-4 right-4 z-40 w-26 h-26 rounded-full  bg-white p-1"
