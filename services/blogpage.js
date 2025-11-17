@@ -18,6 +18,8 @@ export const getBlogData = async () => {
 export const getBlogBySlug = async (slug) => {
   try {
     const response = await newApi.get(`/blogs/${slug}`);
+    console.log("Full API response:", response);
+    console.log("Response data:", response.data);
     return response.data;
   } catch (error) {
     throw error;

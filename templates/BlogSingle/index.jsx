@@ -8,7 +8,7 @@ import rehypeSanitize from "rehype-sanitize";
 const Layout = dynamic(() => import("@/components/Layout"));
 const BlogCard = dynamic(() => import("@/components/BlogCard"));
 import { format } from "date-fns";
-import { getMediaUrl } from "@/utils/media";
+import { getStrapiMedia, getBlogMedia } from "@/utils/media";
 import Image from "next/image";
 
 import {
@@ -19,10 +19,15 @@ import {
 import Head from "next/head";
 
 export default function BlogSingle({ blogData, params, className, allBlogs }) {
-  const shareUrl = "https://easyprwire.com/blogs/";
+  const shareUrl = `https://www.easyprwire.com/blogs/${blogData.slug}`;
 
-  const filteredBlogs = allBlogs?.related_blogs;
-  console.log("related blogs :", filteredBlogs);
+  // Handle both new API structure (with related_blogs) and old structure (with allBlogs)
+  const featuredBlogs = blogData.related_blogs || [];
+
+  // const filteredBlogs =
+  //   relatedBlogs.length > 0
+  //     ? relatedBlogs
+  //     : allBlogs?.filter((blog) => blog.id !== blogData.id).slice(0, 3);
 
   return (
     <>
@@ -81,7 +86,7 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
         <div className="max-w-5xl mx-auto mt-12">
           <figure className="relative min-w-[10rem] block -mt-[10rem] sm:-mt-[20rem] mb-12">
             <Image
-              src={getMediaUrl(blogData?.banner_image)}
+              src={getStrapiMedia(blogData?.banner_image)}
               height={2000}
               width={2000}
               priority
@@ -189,17 +194,14 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
         <section>
           <div className="container mx-auto">
             <h2 className="text-center mb-6">Related Posts</h2>
+
             <div className="grid grid-cols-3 gap-8">
-              {filteredBlogs &&
-                filteredBlogs.map((item, index) => (
+              {Array.isArray(featuredBlogs) &&
+                featuredBlogs.slice(0, 3).map((item, index) => (
                   <div
                     className="col-span-3 md:col-span-1"
-                    key={"blog" + index}>
-                    <BlogCard
-                      blogs={item}
-                      key={"blog home" + index}
-                      className=""
-                    />
+                    key={`related-${index}`}>
+                    <BlogCard blogs={item} />
                   </div>
                 ))}
             </div>

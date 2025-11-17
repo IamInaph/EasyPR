@@ -50,6 +50,10 @@ export async function generateMetadata({ params }) {
 export default async function Post({ params }) {
   const blogData = await getBlogBySlug(params.slug);
   const allBlogsData = await getBlogData();
+  
+  // Log the structure to debug
+  console.log("blogData in page.jsx:", JSON.stringify(blogData, null, 2));
+  console.log("allBlogsData in page.jsx:", JSON.stringify(allBlogsData, null, 2));
 
   return (
     <>
