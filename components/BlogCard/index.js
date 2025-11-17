@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import Image from "next/image";
-import { getStrapiMedia } from "@/utils/media";
+import { getMediaUrl } from "@/utils/media";
 
 const BlogCard = ({ blogs }) => {
   const blogItem = blogs;
@@ -16,7 +16,7 @@ const BlogCard = ({ blogs }) => {
           {blogItem?.banner_image && (
             <figure className="relative min-w-28 min-h-[16rem] block">
               <Image
-                src={getStrapiMedia(blogItem.banner_image)}
+                src={getMediaUrl(blogItem?.banner_image)}
                 fill
                 sizes="100vh"
                 priority

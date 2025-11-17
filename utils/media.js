@@ -47,3 +47,8 @@ export function changeStrapiMarkdown(mdText) {
 
 export const createImageUrl = (image) =>
   image ? URL.createObjectURL(image) : "";
+
+//new
+export const getMediaUrl = (url) => {
+  return `${process.env.NEXT_PUBLIC_IMAGE_URL}/${url}`;
+};
