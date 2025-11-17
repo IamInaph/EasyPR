@@ -5,10 +5,9 @@ import React from "react";
 
 export default function BlogPage({ blogData }) {
   const sortedBlogs = [...(blogData?.blogs || [])].sort(
-    (a, b) =>
-      new Date(b.created_at) - new Date(a.created_at)
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
-  console.log(blogData?.blogs?.[0]);
+  // console.log(blogData?.blogs?.[0]);
   return (
     <>
       <Layout>

@@ -10,6 +10,7 @@ const BlogCard = dynamic(() => import("@/components/BlogCard"));
 import { format } from "date-fns";
 import { getMediaUrl } from "@/utils/media";
 import Image from "next/image";
+import { useEffect } from "react";
 
 import {
   FacebookShareButton,
@@ -21,8 +22,44 @@ import Head from "next/head";
 export default function BlogSingle({ blogData, params, className, allBlogs }) {
   const shareUrl = `https://www.easyprwire.com/blogs/${blogData.slug}`;
 
-  // Handle both new API structure (with related_blogs) and old structure (with allBlogs)
   const featuredBlogs = blogData.related_blogs || [];
+
+  // Send view count to backend on page load
+  useEffect(() => {
+    // Create a unique key for this blog view
+    const viewKey = `blog-view-${blogData.slug}-${Date.now()}`;
+    const trackedViews = JSON.parse(sessionStorage.getItem('blogViews') || '{}');
+    
+    // Check if this exact page load has been tracked
+    if (trackedViews[blogData.slug] && Date.now() - trackedViews[blogData.slug] < 1000) {
+      return; // Skip if already tracked within the last second
+    }
+    
+    // Track this view
+    trackedViews[blogData.slug] = Date.now();
+    sessionStorage.setItem('blogViews', JSON.stringify(trackedViews));
+    
+    // Send view count to backend
+    fetch(`${process.env.NEXT_PUBLIC_BLOGS_API_URL}/api/blogs/update-view`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        slug: blogData.slug,
+      }),
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log("View count updated successfully");
+      } else {
+        console.error("Failed to update view count");
+      }
+    })
+    .catch(error => {
+      console.error("Error updating view count:", error);
+    });
+  }, []);
 
   return (
     <>
