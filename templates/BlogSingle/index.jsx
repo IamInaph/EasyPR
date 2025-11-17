@@ -8,7 +8,7 @@ import rehypeSanitize from "rehype-sanitize";
 const Layout = dynamic(() => import("@/components/Layout"));
 const BlogCard = dynamic(() => import("@/components/BlogCard"));
 import { format } from "date-fns";
-import { getStrapiMedia, getBlogMedia } from "@/utils/media";
+import { getMediaUrl } from "@/utils/media";
 import Image from "next/image";
 
 import {
@@ -23,11 +23,6 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
 
   // Handle both new API structure (with related_blogs) and old structure (with allBlogs)
   const featuredBlogs = blogData.related_blogs || [];
-
-  // const filteredBlogs =
-  //   relatedBlogs.length > 0
-  //     ? relatedBlogs
-  //     : allBlogs?.filter((blog) => blog.id !== blogData.id).slice(0, 3);
 
   return (
     <>
@@ -84,16 +79,18 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
           </div>
         </section>
         <div className="max-w-5xl mx-auto mt-12">
-          <figure className="relative min-w-[10rem] block -mt-[10rem] sm:-mt-[20rem] mb-12">
-            <Image
-              src={getStrapiMedia(blogData?.banner_image)}
-              height={2000}
-              width={2000}
-              priority
-              className="object-cover !aspect-auto"
-              alt={blogData?.banner_image_alt || "Blog image"}
-            />
-          </figure>
+          {blogData?.banner_image && (
+            <figure className="relative min-w-[10rem] block -mt-[10rem] sm:-mt-[20rem] mb-12">
+              <Image
+                src={getMediaUrl(blogData?.banner_image)}
+                height={2000}
+                width={2000}
+                priority
+                className="object-cover !aspect-auto"
+                alt={blogData?.banner_image_alt || "Blog image"}
+              />
+            </figure>
+          )}
 
           <div className="max-w-4xl mx-auto px-4">
             <article className="flex items-start gap-8">
