@@ -4,8 +4,8 @@ import { getBlogBySlug, getBlogData } from "@/services/blogpage";
 
 export async function generateMetadata({ params }) {
   const blogData = await getBlogBySlug(params.slug);
-  const currentBlog = blogData.data.blogs[0];
-  const seo = blogData.data.seo;
+  const currentBlog = blogData;
+  const seo = blogData.seo;
 
   if (!currentBlog) {
     return {
@@ -52,9 +52,9 @@ export default async function Post({ params }) {
   return (
     <>
       <BlogSingle
-        blogData={blogData.data.blogs[0]}
+        blogData={blogData}
         params={params}
-        allBlogs={allBlogsData.data.blogs}
+        allBlogs={allBlogsData.blogs}
       />
     </>
   );
