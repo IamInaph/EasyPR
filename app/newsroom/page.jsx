@@ -2,31 +2,26 @@ import NewsRoomPage from '@/templates/NewsRoomPage'
 import { getNewsRoomData } from '@/services/newsroom'
 
 export async function generateMetadata() {
-	const aboutData = await getNewsRoomData()
-	const AboutMeta = aboutData.data.data.attributes.seo
+	const newsRoomData = await getNewsRoomData()
+	const seo = newsRoomData.seo
 
-	const imageList =
-		aboutData?.data?.data?.attributes?.seo?.metaImage?.media?.data
+	const ogImage = seo?.meta_image
+		? process?.env?.NEXT_PUBLIC_API_URL + seo.meta_image
+		: null
 
-	const ogImages = imageList?.map((img) => ({
-		url: process?.env?.NEXT_PUBLIC_API_URL + img?.attributes?.url,
-		width: img?.attributes?.width,
-		height: img?.attributes?.height,
-		alt: img?.attributes?.alternativeText || img?.attributes?.name,
-	}))
 	return {
 		metadataBase: new URL('https://easyprwire.com'),
-		title: AboutMeta.metaTitle,
-		description: AboutMeta.metaDescription,
+		title: seo.meta_title,
+		description: seo.meta_description,
 		alternates: {
-			canonical: '/blog',
+			canonical: '/newsroom',
 		},
 		openGraph: {
 			type: 'website',
 			locale: 'en_IE',
-			url: 'https://easyprwire.com/blog',
+			url: 'https://easyprwire.com/newsroom',
 			siteName: 'Easy PR',
-			images: ogImages,
+			images: ogImage ? [{ url: ogImage }] : [],
 			twitter: {
 				site: '@easyprco',
 				cardType: 'summary_large_image',
@@ -36,7 +31,7 @@ export async function generateMetadata() {
 }
 
 export default async function NewsRoom() {
-	const blogData = await getNewsRoomData()
+	const newsData = await getNewsRoomData()
 
-	return <NewsRoomPage newsData={blogData.data} />
+	return <NewsRoomPage newsData={newsData} />
 }

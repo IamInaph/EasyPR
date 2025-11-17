@@ -1,89 +1,36 @@
-import React from 'react'
-import { getNewsRoomData } from '@/services/newsroom'
-import NewsSingle from '@/templates/NewsSingle'
+import NewsSingle from "@/templates/NewsSingle";
+import { getNewsRoomBySlug } from "@/services/newsroom";
 
 export async function generateMetadata({ params }) {
-	const fetchBlogs = async () => {
-		try {
-			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/api/newsroom-page/?populate=deep`
-			)
-			const data = await res.json()
+  const newsData = await getNewsRoomBySlug(params.slug);
+  const seo = newsData?.seo;
 
-			return data
-		} catch (error) {
-			console.log('[NEWS_DETAILS]', error)
-		}
-	}
+  const ogImage = seo?.meta_image
+    ? process?.env?.NEXT_PUBLIC_API_URL + seo.meta_image
+    : null;
 
-	const blogPageData = await fetchBlogs()
-
-	const blogs = blogPageData?.data?.attributes?.newsrooms?.data // <-- this is the array
-	if (!Array.isArray(blogs)) {
-		return {
-			title: 'Invalid Data',
-			description: 'Could not fetch blog metadata.',
-		}
-	}
-
-	const currentBlog = blogs?.find(
-		(item) => item.attributes.slug === params.slug
-	)
-
-	if (!currentBlog) {
-		return {
-			title: 'Blog',
-			description: 'The requested blog could not be found.',
-		}
-	}
-
-	const seo = currentBlog.attributes.seo
-	
-	const imageUrl =
-		currentBlog.attributes.image?.url ||
-		'https://res.cloudinary.com/dbhgrickp/image/upload/v1720070017/website-opener_na7bu9.jpg'
-
-	const imageList = currentBlog?.attributes?.seo?.metaImage?.media?.data
-
-	const ogImages = imageList?.map((img) => ({
-		url: process?.env?.NEXT_PUBLIC_API_URL + img?.attributes?.url,
-		width: img?.attributes?.width,
-		height: img?.attributes?.height,
-		alt: img?.attributes?.alternativeText || img?.attributes?.name,
-	}))
-
-	return {
-		metadataBase: new URL('https://easyprwire.com'),
-		title: seo?.metaTitle || currentBlog.attributes.title,
-		description: seo?.metaDescription || 'Read the full article on EasyPRWire.',
-		alternates: {
-			canonical: `/blog/${params.slug}`,
-		},
-		openGraph: {
-			type: 'article',
-			locale: 'en_IE',
-			url: `https://easyprwire.com/blog/${params.slug}`,
-			siteName: 'Easy PR',
-			title: seo?.metaTitle || currentBlog.attributes.title,
-			description: seo?.metaDescription,
-			images: ogImages,
-		},
-		twitter: {
-			site: '@easyprco',
-			cardType: 'summary_large_image',
-			title: seo?.metaTitle || currentBlog.attributes.title,
-			description: seo?.metaDescription,
-			images: [imageUrl],
-		},
-	}
+  return {
+    metadataBase: new URL("https://easyprwire.com"),
+    title: seo?.meta_title || newsData?.title,
+    description: seo?.meta_description || newsData?.description,
+    alternates: {
+      canonical: `/newsroom/${params.slug}`,
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_IE",
+      url: `https://easyprwire.com/newsroom/${params.slug}`,
+      siteName: "Easy PR",
+      images: ogImage ? [{ url: ogImage }] : [],
+      twitter: {
+        site: "@easyprco",
+        cardType: "summary_large_image",
+      },
+    },
+  };
 }
 
-export default async function NewsPost({ params }) {
-	const blogData = await getNewsRoomData()
-
-	return (
-		<>
-			<NewsSingle blogData={blogData.data} params={params} />
-		</>
-	)
+export default async function NewsRoomSingle({ params }) {
+  const newsData = await getNewsRoomBySlug(params.slug);
+  return <NewsSingle newsData={newsData} params={params} />;
 }
