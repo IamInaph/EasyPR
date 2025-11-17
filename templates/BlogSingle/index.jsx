@@ -8,7 +8,7 @@ import rehypeSanitize from "rehype-sanitize";
 const Layout = dynamic(() => import("@/components/Layout"));
 const BlogCard = dynamic(() => import("@/components/BlogCard"));
 import { format } from "date-fns";
-import { getStrapiMedia } from "@/utils/media";
+import { getMediaUrl } from "@/utils/media";
 import Image from "next/image";
 
 import {
@@ -19,11 +19,10 @@ import {
 import Head from "next/head";
 
 export default function BlogSingle({ blogData, params, className, allBlogs }) {
-  const shareUrl = "https://www.easyprwire.com/blogs/";
+  const shareUrl = "https://easyprwire.com/blogs/";
 
-  const filteredBlogs = allBlogs
-    ?.filter((blog) => blog.id !== blogData.id)
-    .slice(0, 3);
+  const filteredBlogs = allBlogs?.related_blogs;
+  console.log("related blogs :", filteredBlogs);
 
   return (
     <>
@@ -82,7 +81,7 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
         <div className="max-w-5xl mx-auto mt-12">
           <figure className="relative min-w-[10rem] block -mt-[10rem] sm:-mt-[20rem] mb-12">
             <Image
-              src={getStrapiMedia(blogData?.banner_image)}
+              src={getMediaUrl(blogData?.banner_image)}
               height={2000}
               width={2000}
               priority
@@ -192,7 +191,7 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
             <h2 className="text-center mb-6">Related Posts</h2>
             <div className="grid grid-cols-3 gap-8">
               {filteredBlogs &&
-                filteredBlogs.slice(0, 3).map((item, index) => (
+                filteredBlogs.map((item, index) => (
                   <div
                     className="col-span-3 md:col-span-1"
                     key={"blog" + index}>
