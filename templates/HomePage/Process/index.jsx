@@ -38,8 +38,7 @@ export default function Process({ process, growBrand }) {
                       height="230"
                       viewBox="0 0 30 230"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                      xmlns="http://www.w3.org/2000/svg">
                       <circle
                         cx="15"
                         cy="14.625"
@@ -83,8 +82,7 @@ export default function Process({ process, growBrand }) {
                       height="411"
                       viewBox="0 0 30 411"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                      xmlns="http://www.w3.org/2000/svg">
                       <rect
                         x="14.5"
                         width="1"
@@ -148,8 +146,7 @@ export default function Process({ process, growBrand }) {
                       height="411"
                       viewBox="0 0 30 411"
                       fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                      xmlns="http://www.w3.org/2000/svg">
                       <rect
                         x="14.5"
                         width="1"
@@ -185,7 +182,7 @@ export default function Process({ process, growBrand }) {
             })}
           </div>
           <div className="max-w-5xl mx-auto mt-20">
-            <div className="bg-linear-gradient-secondary rounded-2xl lg:p-[4rem] p-10  mx-2 text-center flex flex-col ">
+            <div className="bg-linear-gradient-secondary rounded-2xl lg:p-[4rem] p-10  mx-2 text-center flex flex-col items-center ">
               <h2 className="text-white">{growBrand?.title}</h2>
               <span className="text-gray-400 text-lg max-w-2xl mx-auto">
                 {growBrand?.description}

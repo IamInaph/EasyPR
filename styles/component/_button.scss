@@ -46,6 +46,11 @@
     transition: all 0.15s ease-in-out;
     z-index: 3;
   }
+  &-custom-padding {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    height: 48px !important;
+  }
 }
 
 .btn:is(input[type="checkbox"]):after,

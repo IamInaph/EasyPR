@@ -15,8 +15,7 @@ export default function Outlets({ plan }) {
     <>
       <div
         className="rounded-xl bg-slate-50 p-6 hidden lg:flex justify-between items-center cursor-pointer mb-6"
-        onClick={toggleAccordion}
-      >
+        onClick={toggleAccordion}>
         <h4 className="text-2xl">Included Outlets</h4>
         <Icon
           icon={isOpen ? "mdi:chevron-up" : "mdi:chevron-down"}
@@ -30,8 +29,7 @@ export default function Outlets({ plan }) {
             return (
               <div
                 className="grid grid-cols-10 gap-2 w-full"
-                key={`overview-topic-` + index + new Date().toString()}
-              >
+                key={`overview-topic-` + index + new Date().toString()}>
                 <div className="lg:col-span-3 col-span-10">
                   <div className="table-item flex items-center gap-3">
                     <span> {item.attributes.name} </span>
@@ -61,10 +59,13 @@ export default function Outlets({ plan }) {
                       return (
                         <div
                           key={`outlets-` + index + new Date().toString()}
-                          className=" table-item"
-                        >
+                          className=" table-item">
                           {findData?.isAvailable ? (
-                            <Icon icon="charm:tick" color="#32d583" height={24} />
+                            <Icon
+                              icon="charm:tick"
+                              color="#32d583"
+                              height={24}
+                            />
                           ) : (
                             <Icon
                               icon="radix-icons:cross-2"

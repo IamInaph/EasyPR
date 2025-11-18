@@ -1,9 +1,27 @@
 import { DownloadCloud } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PlanReport from "../PlanReport";
 
-export default function PlanType({ plan, indiePage, isSmall }) {
+export default function PlanType({ plan, indiePage }) {
+  const [istop, setistop] = useState(true);
+
+  useEffect(() => {
+    const listenScrollEvent = () => {
+      const scrollY = window.scrollY;
+      const limit = indiePage ? 412 : 2850;
+
+      // Only update if necessary
+      if (scrollY > limit && istop) {
+        setistop(false);
+      } else if (scrollY <= limit && !istop) {
+        setistop(true);
+      }
+    };
+
+    window.addEventListener("scroll", listenScrollEvent);
+    return () => window.removeEventListener("scroll", listenScrollEvent);
+  }, [indiePage, istop]);
   const handleReportDownload = (e, name, url) => {
     e.preventDefault();
     const reportUrl = `${process.env.NEXT_PUBLIC_API_URL}${url}`;
@@ -20,7 +38,9 @@ export default function PlanType({ plan, indiePage, isSmall }) {
     <>
       {/* <PlanReport plan={plan} className={'hidden lg:block'} /> */}
       <div
-        className={`sticky z-[100] top-[4rem] min-w-full lg:min-w-fit pt-4 pb-2 border-y bg-white`}>
+        className={`${
+          istop ? "" : "stick-price pt-4 pb-2 border-y"
+        } sticky z-[100] top-[4rem] min-w-full lg:min-w-fit `}>
         <div className="container">
           <div className="grid grid-cols-10 gap-2 w-full ">
             <div className="lg:col-span-3 col-span-10 bg-white">
@@ -38,19 +58,17 @@ export default function PlanType({ plan, indiePage, isSmall }) {
                           <strong className="stick-title">
                             {item.attributes.name}
                           </strong>
-                          <strong
-                            className={`stick-amount ${!isSmall && "hidden"}`}>
+                          <strong className="stick-amount">
                             ${item.attributes.offerPrice}{" "}
                           </strong>
                         </div>
 
-                        <span className={`stick-text ${isSmall && "hidden"}`}>
-                          For {item.attributes.businessType} business
+                        <span className={`stick-text ${!istop && "hidden"}`}>
                         </span>
                       </div>
                       <div
                         className={`flex flex-row justify-between gap-2 items-center group cursor-pointer ${
-                          isSmall && "hidden"
+                          !istop && "hidden"
                         }`}
                         onClick={(e) =>
                           handleReportDownload(
@@ -66,8 +84,7 @@ export default function PlanType({ plan, indiePage, isSmall }) {
                         </div>
                         <DownloadCloud className="duration-200 group-hover:scale-110 w-4 h-4" />
                       </div>
-                      <div className={`${isSmall && "hidden"}`}>
-                        <strong className="stick-amount-primary">
+                      <div className={`${!istop && "hidden"}`}>
                           ${item.attributes.offerPrice}{" "}
                           <span className="line-through text-xl text-gray-500">
                             {" "}
@@ -79,7 +96,7 @@ export default function PlanType({ plan, indiePage, isSmall }) {
                       <div className="flex-grow flex items-end justify-center">
                         <Link
                           href={`https://orders.easyprwire.com/${item.attributes.name.toLowerCase()}`}
-                          className="btn btn-outline btn-lg w-full text-center"
+                          className="btn btn-outline w-full bg-transparent hover:bg-transparent btn-custom-padding"
                           target="_blank">
                           Order Now
                         </Link>
