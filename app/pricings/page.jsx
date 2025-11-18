@@ -44,7 +44,7 @@ const PricingsPage = async () => {
   });
 
   return (
-    <Layout>
+    <Layout plan={plan[0]}>
       <Plan plan={plan[0]} indiePage={true} />
     </Layout>
   );

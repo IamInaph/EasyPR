@@ -87,7 +87,7 @@ const Header = ({ plan }) => {
       <header
         className={`${
           istop ? "" : "shrink-header"
-        } sticky z-50 top-0 duration-300 ease-in-out bg-white `}>
+        } sticky z-[500] top-0 duration-300 ease-in-out bg-white `}>
         <div className="container">
           <div className="flex items-center ">
             <Link href="/">
