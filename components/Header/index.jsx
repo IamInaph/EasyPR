@@ -97,15 +97,11 @@ const Header = ({ plan }) => {
               className={`main-menu ${isMainNavOpen ? "active" : " "}
               `}>
               <div>
-                <Link className="nav-link" href="/#plan">
-                  Packages
+                <Link className="nav-link" href="/pricings">
+                  Pricing
                 </Link>
               </div>
-              {/* <div>
-                <Link className="nav-link" href="/#review">
-                  Reviews
-                </Link>
-              </div> */}
+
               <div>
                 <Link className="nav-link" href="/blogs">
                   Blogs

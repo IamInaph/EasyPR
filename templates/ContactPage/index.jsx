@@ -163,22 +163,6 @@ export default function ContactPage({ content }) {
     }
   };
 
-  // const sendMail = (e) => {
-  //   e.preventDefault();
-  //   send(
-  //     "service_fch9wyw",
-  //     "template_hn7631i",
-  //     { sender_name, sender_email, sender_number, message },
-  //     "xMEVn3JDlntZ2nLly"
-  //   )
-  //     .then((response) => {
-  //       // console.log("message sent ", response.status, response.text);
-  //       router.push("/success");
-  //     })
-  //     .catch((err) => {
-  //       console.log("Failed ", err);
-  //     });
-  // };
   return (
     <>
       <Layout>
@@ -216,7 +200,7 @@ export default function ContactPage({ content }) {
                       <input
                         type="text"
                         placeholder="Enter your full name (minimum 3 characters)"
-                        className="input input-bordered w-full input-lg px-6 border border-gray-400"
+                        className="input input-bordered w-full input-lg px-6 py-5 border border-gray-400"
                         value={sender_full_name}
                         onChange={handleFName}
                         required
@@ -237,7 +221,7 @@ export default function ContactPage({ content }) {
                     <input
                       type="text"
                       placeholder="Enter a valid phone no. (e.g., +1 41XXXXXXXX)"
-                      className="input input-bordered w-full input-lg px-6 border border-gray-400"
+                      className="input input-bordered w-full input-lg px-6 py-5 border border-gray-400"
                       value={sender_telegram}
                       onChange={handleTelegram}
                       required
@@ -255,24 +239,13 @@ export default function ContactPage({ content }) {
                     <input
                       type="email"
                       placeholder="Enter a valid email address (e.g., name@example.com)"
-                      className="input input-bordered w-full input-lg px-6 border border-gray-400"
+                      className="input input-bordered w-full input-lg px-6 py-5 border border-gray-400"
                       value={sender_email}
                       onChange={handleEmail}
                       required
                     />
                   </label>
-                  {/* <label className='form-control w-full '>
-										<div className='label'>
-											<span className='label-text'>Your Organization</span>
-										</div>
-										<input
-											type='text'
-											placeholder='Enter your organization name'
-											className='input input-bordered w-full input-lg'
-											onChange={handleOrganization}
-											value={sender_organization}
-										/>
-									</label> */}
+
                   <label className="form-control w-full ">
                     <div className="label">
                       <span className="label-text">
@@ -287,7 +260,7 @@ export default function ContactPage({ content }) {
                     <input
                       type="text"
                       placeholder="Enter your website url (e.g., https://www.abc.xyz/...)"
-                      className="input input-bordered w-full input-lg px-6 border border-gray-400"
+                      className="input input-bordered w-full input-lg px-6 py-5 border border-gray-400"
                       onChange={handleWebURL}
                       value={sender_url}
                     />
@@ -299,8 +272,8 @@ export default function ContactPage({ content }) {
                       </span>
                     </div>
                     <textarea
-                      className="textarea textarea-bordered textarea-lg min-h-[10rem] py-4 px-6 border border-gray-400"
-                      placeholder="Please describe your requirements (minimum 10 characters)"
+                      className="textarea textarea-bordered textarea-lg w-full min-h-[10rem] py-4 px-6 border border-gray-400"
+                      placeholder="Tell us something that you want..."
                       required
                       value={sender_message}
                       onChange={handleMessage}></textarea>
