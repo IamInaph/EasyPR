@@ -145,7 +145,7 @@ export default function ContactPage({ content }) {
       };
 
       const response = await submitContactForm(formData);
-      
+
       if (response.message === "Contact form submitted successfully.") {
         setMainError("");
         router.push("/message-confirmation");
@@ -154,7 +154,7 @@ export default function ContactPage({ content }) {
       }
     } catch (error) {
       console.log("[CONTACT_FORM]", error);
-      } finally {
+    } finally {
       setIsSending(false);
 
       setTimeout(() => {
@@ -216,7 +216,7 @@ export default function ContactPage({ content }) {
                       <input
                         type="text"
                         placeholder="Enter your full name (minimum 3 characters)"
-                        className="input input-bordered w-full input-lg"
+                        className="input input-bordered w-full input-lg px-6 border border-gray-400"
                         value={sender_full_name}
                         onChange={handleFName}
                         required
@@ -237,7 +237,7 @@ export default function ContactPage({ content }) {
                     <input
                       type="text"
                       placeholder="Enter a valid phone no. (e.g., +1 41XXXXXXXX)"
-                      className="input input-bordered w-full input-lg"
+                      className="input input-bordered w-full input-lg px-6 border border-gray-400"
                       value={sender_telegram}
                       onChange={handleTelegram}
                       required
@@ -255,7 +255,7 @@ export default function ContactPage({ content }) {
                     <input
                       type="email"
                       placeholder="Enter a valid email address (e.g., name@example.com)"
-                      className="input input-bordered w-full input-lg"
+                      className="input input-bordered w-full input-lg px-6 border border-gray-400"
                       value={sender_email}
                       onChange={handleEmail}
                       required
@@ -287,7 +287,7 @@ export default function ContactPage({ content }) {
                     <input
                       type="text"
                       placeholder="Enter your website url (e.g., https://www.abc.xyz/...)"
-                      className="input input-bordered w-full input-lg"
+                      className="input input-bordered w-full input-lg px-6 border border-gray-400"
                       onChange={handleWebURL}
                       value={sender_url}
                     />
@@ -299,7 +299,7 @@ export default function ContactPage({ content }) {
                       </span>
                     </div>
                     <textarea
-                      className="textarea textarea-bordered textarea-lg min-h-[10rem]"
+                      className="textarea textarea-bordered textarea-lg min-h-[10rem] py-4 px-6 border border-gray-400"
                       placeholder="Please describe your requirements (minimum 10 characters)"
                       required
                       value={sender_message}
@@ -309,7 +309,7 @@ export default function ContactPage({ content }) {
                     <p className="text-center text-red-500">{mainError}</p>
                   )}
                   <button
-                    className="btn btn-secondary btn-lg"
+                    className="btn btn-secondary btn-lg py-4 px-7"
                     type="submit"
                     disabled={isSending}>
                     {isSending ? "Sending..." : "Send a Message"}
