@@ -1,7 +1,13 @@
 import Layout from "@/components/Layout";
 import ServiceList from "@/components/ServiceList";
+import { getHomepageData } from "@/services/homepage";
+import Plan from "@/templates/ServicePage/Plan";
 
-export default function AllServices() {
+export default async function AllServices() {
+  const homeData = await getHomepageData();
+  const plan = homeData?.data?.data?.attributes?.content?.find(
+    (content) => content?.section?.uid === "pricing"
+  );
   const services = [
     {
       title: "Press Release Distribution Services For SaaS",
@@ -43,6 +49,7 @@ export default function AllServices() {
           <ServiceList services={services} />
         </div>
       </section>
+      <Plan plan={plan} />
     </Layout>
   );
 }

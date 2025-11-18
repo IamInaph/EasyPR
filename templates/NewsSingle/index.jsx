@@ -1,227 +1,256 @@
-'use client'
+"use client";
 
-import dynamic from 'next/dynamic'
-import { Icon } from '@iconify/react'
-import Markdown from 'react-markdown'
-import { getStrapiMedia } from '@/utils/media'
-const Layout = dynamic(() => import('@/components/Layout'))
-const NewsCard = dynamic(() => import('@/components/NewsCard'))
-import { format } from 'date-fns'
+import dynamic from "next/dynamic";
+import { Icon } from "@iconify/react";
+import Markdown from "react-markdown";
+import { getMediaUrl } from "@/utils/media";
+const Layout = dynamic(() => import("@/components/Layout"));
+const NewsCard = dynamic(() => import("@/components/NewsCard"));
+import { format } from "date-fns";
+import { useEffect } from "react";
 
-import Image from 'next/image'
+import Image from "next/image";
 import {
-   FacebookShareButton,
-   LinkedinShareButton,
-   TwitterShareButton,
-} from 'react-share'
-import rehypeRaw from 'rehype-raw'
-import rehypeSanitize from 'rehype-sanitize'
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+} from "react-share";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 
-export default function NewsSingle({ blogData, params, className }) {
-   console.log('NSign', blogData)
-   const shareUrl = 'https://www.easyprwire.com/newsroom/'
-   const blogPageData = blogData.data.attributes.newsrooms.data
-   const currentBlog = blogPageData?.find(
-      (item) => item.attributes.slug === params.slug
-   )
-   const filteredBlogs = blogPageData?.filter(
-      (item) => item.attributes.slug !== params.slug
-   )
+export default function NewsSingle({ newsData, params, className }) {
+  console.log("NewsSingle", newsData);
+  const shareUrl = `https://www.easyprwire.com/newsroom/${params.slug}`;
 
-   return (
-			<>
-				<Layout>
-					<section className='pb-[10rem] sm:pb-[20rem] bg-primary-100'>
-						<div className='max-w-3xl px-3 mx-auto'>
-							<div className='text-center'>
-								<div className='flex gap-4 justify-center text-xl max-sm:text-sm'>
-									<div>
-										{format(
-											new Date(currentBlog?.attributes?.createdAt),
-											'd MMM yyy'
-										)}
-									</div>
-									<div>|</div>
-									<div>
-										{currentBlog?.attributes?.readableInMinutes || 5} min read
-									</div>
-									<div>|</div>
-									<div>Marketing</div>
-								</div>
-								<h1 className='text-6xl mt-2 leading-tight max-sm:text-2xl'>
-									{currentBlog?.attributes?.title}
-								</h1>
-								<div className='flex gap-4 justify-center mt-8'>
-									<div className='h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center'>
-										<FacebookShareButton
-											url={shareUrl}
-											quote=' Maximizing your reach with marketing strategies'
-										>
-											<Icon
-												icon='bxl:facebook'
-												height={26}
-												className='text-gray-900'
-											/>
-										</FacebookShareButton>
-									</div>
-									<div className='h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center'>
-										<TwitterShareButton
-											url={shareUrl}
-											quote=' Maximizing your reach with marketing strategies'
-										>
-											<Icon
-												icon='bxl:twitter'
-												height={26}
-												className='text-gray-900'
-											/>
-										</TwitterShareButton>
-									</div>
-									<div className='h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center'>
-										<LinkedinShareButton
-											url={shareUrl}
-											quote=' Maximizing your reach with marketing strategies'
-										>
-											<Icon
-												icon='bxl:linkedin'
-												height={26}
-												className='text-gray-900'
-											/>
-										</LinkedinShareButton>
-									</div>
-								</div>
-							</div>
-						</div>
-					</section>
-					<div className='max-w-5xl mx-auto mt-12'>
-						<figure className='relative min-w-[10rem] block -mt-[10rem] sm:-mt-[20rem] mb-12'>
-							<Image
-								src={getStrapiMedia(currentBlog?.attributes?.image?.media)}
-								height={2000}
-								width={2000}
-								priority
-								className='object-cover !aspect-auto'
-								alt={currentBlog?.attributes?.image?.alt}
-							/>
-						</figure>
-						<div className='max-w-4xl mx-auto px-4'>
-							<article className='flex items-start gap-8'>
-								<div className='blog-content max-sm:text-lg overflow-x-auto'>
-									<Markdown
-										rehypePlugins={[rehypeRaw, rehypeSanitize]}
-										components={{
-											a: ({ node, ...props }) => (
-												<a
-													{...props}
-													className='text-blue-600 underline hover:text-blue-800'
-													target='_blank'
-													rel='noopener noreferrer'
-												/>
-											),
-											ul: ({ node, ...props }) => (
-												<ul {...props} className='list-disc pl-6 mb-4' />
-											),
-											ol: ({ node, ...props }) => (
-												<ol {...props} className='list-decimal pl-6 mb-4' />
-											),
-											li: ({ node, ...props }) => (
-												<li {...props} className='mb-1' />
-											),
-											strong: ({ node, ...props }) => (
-												<strong {...props} className='text-black font-bold' />
-											),
-											table: ({ node, ...props }) => (
-												<div className='overflow-x-auto my-4'>
-													<table
-														{...props}
-														className='border border-gray-300 border-collapse min-w-max text-sm'
-													/>
-												</div>
-											),
-											th: ({ node, ...props }) => (
-												<th
-													{...props}
-													className='border border-gray-400 bg-gray-100 px-3 py-2 text-left font-semibold '
-												/>
-											),
-											td: ({ node, ...props }) => (
-												<td
-													{...props}
-													className='border border-gray-300 px-3 py-2'
-												/>
-											),
-										}}
-									>
-										{currentBlog?.attributes?.content}
-									</Markdown>
-								</div>
-							</article>
+  // Send view count to backend on page load
+  useEffect(() => {
+    // Create a unique key for this news view
+    const viewKey = `news-view-${newsData.slug}-${Date.now()}`;
+    const trackedViews = JSON.parse(
+      sessionStorage.getItem("newsViews") || "{}"
+    );
 
-							<div className='border-t'>
-								<div className='flex items-center py-12 rounded-xl justify-center gap-6'>
-									<div className='text-center'>
-										<strong className='text-lg'>Share:</strong>
-									</div>
-									<div className='flex gap-2 justify-center'>
-										<div className='h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center'>
-											<FacebookShareButton
-												url={shareUrl}
-												quote=' Maximizing your reach with marketing strategies'
-											>
-												<Icon
-													icon='bxl:facebook'
-													height={26}
-													className='text-gray-500'
-												/>
-											</FacebookShareButton>
-										</div>
-										<div className='h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center'>
-											<TwitterShareButton
-												url={shareUrl}
-												quote=' Maximizing your reach with marketing strategies'
-											>
-												<Icon
-													icon='bxl:twitter'
-													height={26}
-													className='text-gray-500'
-												/>
-											</TwitterShareButton>
-										</div>
-										<div className='h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center'>
-											<LinkedinShareButton
-												url={shareUrl}
-												quote=' Maximizing your reach with marketing strategies'
-											>
-												<Icon
-													icon='bxl:linkedin'
-													height={26}
-													className='text-gray-500'
-												/>
-											</LinkedinShareButton>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+    // Check if this exact page load has been tracked
+    if (
+      trackedViews[newsData.slug] &&
+      Date.now() - trackedViews[newsData.slug] < 1000
+    ) {
+      return; // Skip if already tracked within the last second
+    }
 
-					<section>
-						<div className='container mx-auto'>
-							<h2 className='text-center mb-6'>Related Posts</h2>
-							<div className='grid grid-cols-3 gap-8'>
-								{filteredBlogs &&
-									filteredBlogs?.slice(0, 3)?.map((item, index) => (
-										<div className='col-span-3 md:col-span-1'>
-											<NewsCard
-												news={item}
-												key={'news home' + index}
-												className=''
-											/>
-										</div>
-									))}
-							</div>
-						</div>
-					</section>
-				</Layout>
-			</>
-		)
+    // Track this view
+    trackedViews[newsData.slug] = Date.now();
+    sessionStorage.setItem("newsViews", JSON.stringify(trackedViews));
+
+    // Send view count to backend
+    fetch(
+      `${process.env.NEXT_PUBLIC_BLOGS_API_URL}/api/newsrooms/update-view`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          slug: newsData.slug,
+        }),
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          console.log("View count updated successfully");
+        } else {
+          console.error("Failed to update view count");
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating view count:", error);
+      });
+  }, []);
+
+  return (
+    <>
+      <Layout>
+        <section className="pb-[10rem] sm:pb-[20rem] bg-primary-100">
+          <div className="max-w-3xl px-3 mx-auto">
+            <div className="text-center">
+              <div className="flex gap-4 justify-center text-xl max-sm:text-sm">
+                <div>{format(new Date(newsData?.created_at), "d MMM yyy")}</div>
+                <div>|</div>
+                <div>{newsData?.readableInMinutes || 5} min read</div>
+                <div>|</div>
+                <div>Marketing</div>
+              </div>
+              <h1 className="text-6xl mt-2 leading-tight max-sm:text-2xl">
+                {newsData?.title}
+              </h1>
+              <div className="flex gap-4 justify-center mt-8">
+                <div className="h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center">
+                  <FacebookShareButton
+                    url={shareUrl}
+                    quote=" Maximizing your reach with marketing strategies">
+                    <Icon
+                      icon="bxl:facebook"
+                      height={26}
+                      className="text-gray-900"
+                    />
+                  </FacebookShareButton>
+                </div>
+                <div className="h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center">
+                  <TwitterShareButton
+                    url={shareUrl}
+                    quote=" Maximizing your reach with marketing strategies">
+                    <Icon
+                      icon="bxl:twitter"
+                      height={26}
+                      className="text-gray-900"
+                    />
+                  </TwitterShareButton>
+                </div>
+                <div className="h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center">
+                  <LinkedinShareButton
+                    url={shareUrl}
+                    quote=" Maximizing your reach with marketing strategies">
+                    <Icon
+                      icon="bxl:linkedin"
+                      height={26}
+                      className="text-gray-900"
+                    />
+                  </LinkedinShareButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div className="max-w-5xl mx-auto mt-12">
+          {newsData?.banner_image && (
+            <figure className="relative min-w-[10rem] block -mt-[10rem] sm:-mt-[20rem] mb-12">
+              <Image
+                src={getMediaUrl(newsData?.banner_image)}
+                height={2000}
+                width={2000}
+                priority
+                className="object-cover !aspect-auto"
+                alt={newsData?.banner_image_alt || "News image"}
+              />
+            </figure>
+          )}
+
+          <div className="max-w-4xl mx-auto px-4">
+            <article className="flex items-start gap-8">
+              <div className="blog-content max-sm:text-lg overflow-x-auto">
+                <Markdown
+                  rehypePlugins={[rehypeRaw, rehypeSanitize]}
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <a
+                        {...props}
+                        className="text-blue-600 underline hover:text-blue-800"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      />
+                    ),
+                    ul: ({ node, ...props }) => (
+                      <ul {...props} className="list-disc pl-6 mb-4" />
+                    ),
+                    ol: ({ node, ...props }) => (
+                      <ol {...props} className="list-decimal pl-6 mb-4" />
+                    ),
+                    li: ({ node, ...props }) => (
+                      <li {...props} className="mb-1" />
+                    ),
+                    strong: ({ node, ...props }) => (
+                      <strong {...props} className="text-black font-bold" />
+                    ),
+                    table: ({ node, ...props }) => (
+                      <div className="overflow-x-auto my-4">
+                        <table
+                          {...props}
+                          className="border border-gray-300 border-collapse min-w-max text-sm"
+                        />
+                      </div>
+                    ),
+                    th: ({ node, ...props }) => (
+                      <th
+                        {...props}
+                        className="border border-gray-400 bg-gray-100 px-3 py-2 text-left font-semibold "
+                      />
+                    ),
+                    td: ({ node, ...props }) => (
+                      <td
+                        {...props}
+                        className="border border-gray-300 px-3 py-2"
+                      />
+                    ),
+                  }}>
+                  {newsData?.content}
+                </Markdown>
+              </div>
+            </article>
+
+            <div className="border-t">
+              <div className="flex items-center py-12 rounded-xl justify-center gap-6">
+                <div className="text-center">
+                  <strong className="text-lg">Share:</strong>
+                </div>
+                <div className="flex gap-2 justify-center">
+                  <div className="h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center">
+                    <FacebookShareButton
+                      url={shareUrl}
+                      quote=" Maximizing your reach with marketing strategies">
+                      <Icon
+                        icon="bxl:facebook"
+                        height={26}
+                        className="text-gray-500"
+                      />
+                    </FacebookShareButton>
+                  </div>
+                  <div className="h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center">
+                    <TwitterShareButton
+                      url={shareUrl}
+                      quote=" Maximizing your reach with marketing strategies">
+                      <Icon
+                        icon="bxl:twitter"
+                        height={26}
+                        className="text-gray-500"
+                      />
+                    </TwitterShareButton>
+                  </div>
+                  <div className="h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center">
+                    <LinkedinShareButton
+                      url={shareUrl}
+                      quote=" Maximizing your reach with marketing strategies">
+                      <Icon
+                        icon="bxl:linkedin"
+                        height={26}
+                        className="text-gray-500"
+                      />
+                    </LinkedinShareButton>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section>
+          <div className="container mx-auto">
+            <h2 className="text-center mb-6">Related Posts</h2>
+            <div className="grid grid-cols-3 gap-8">
+              {Array.isArray(newsData?.related_news) &&
+                newsData.related_news.slice(0, 3).map((item, index) => (
+                  <div
+                    className="col-span-3 md:col-span-1"
+                    key={`related-${index}`}>
+                    <NewsCard
+                      news={item}
+                      key={"news home" + index}
+                      className=""
+                    />
+                  </div>
+                ))}
+            </div>
+          </div>
+        </section>
+      </Layout>
+    </>
+  );
 }

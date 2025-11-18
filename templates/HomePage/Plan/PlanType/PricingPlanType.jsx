@@ -3,25 +3,35 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import PlanReport from "../PlanReport";
 
-export default function PlanType({ plan, indiePage }) {
+export default function PricingPlanType({ plan }) {
   const [istop, setistop] = useState(true);
+  const [planTop, setPlanTop] = useState(0);
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   useEffect(() => {
-    const listenScrollEvent = () => {
-      const scrollY = window.scrollY;
-      const limit = indiePage ? 412 : 2850;
+    const header = document.querySelector("header");
+    setHeaderHeight(header ? header.offsetHeight : 0);
 
+    // Get the initial position of the plan section
+    const planSection = document.getElementById("plan");
+    if (planSection) {
+      setPlanTop(planSection.offsetTop - (header ? header.offsetHeight : 0));
+    }
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      
       // Only update if necessary
-      if (scrollY > limit && istop) {
+      if (scrollY > planTop && istop) {
         setistop(false);
-      } else if (scrollY <= limit && !istop) {
+      } else if (scrollY <= planTop && !istop) {
         setistop(true);
       }
     };
 
-    window.addEventListener("scroll", listenScrollEvent);
-    return () => window.removeEventListener("scroll", listenScrollEvent);
-  }, [indiePage, istop]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [istop, planTop]);
 
   const handleReportDownload = (e, name, url) => {
     e.preventDefault();
@@ -35,13 +45,15 @@ export default function PlanType({ plan, indiePage }) {
     link.click();
     document.body.removeChild(link);
   };
+
   return (
     <>
       {/* <PlanReport plan={plan} className={'hidden lg:block'} /> */}
       <div
         className={`${
-          istop ? "" : "stick-price pt-4 pb-2 border-y"
-        } sticky z-[100] top-[4rem] min-w-full lg:min-w-fit `}>
+          istop ? "" : "!pt-1 !pb-2 stick-price pricing-plan border-y"
+        } sticky z-[100] top-[4rem] min-w-full lg:min-w-fit lg:!pt-[1rem] lg:!pb-[0.5rem]`}
+        style={{ paddingTop: istop ? '0' : '1rem', paddingBottom: istop ? '0' : '0.5rem' }}>
         <div className="container">
           <div className="grid grid-cols-10 gap-2 w-full ">
             <div className="lg:col-span-3 col-span-10 bg-white">

@@ -11,9 +11,15 @@ const TestimonialCard = ({ testimonial, isActive }) => {
     <div
       className={`p-8 border rounded-xl bg-white ${
         isActive ? "tab-active" : ""
-      }`}
-    >
+      }`}>
       <div className="flex items-center mb-4">
+        <Image
+          src="/assets/Trustpilot.jpg"
+          alt="Trustpilot"
+          width={100} // Adjust width as needed
+          height={20} // Adjust height as needed
+          className="mr-2 rounded-[3px]"
+        />
         {[...Array(5)].map((_, i) => (
           <Icon
             key={i}
@@ -25,18 +31,18 @@ const TestimonialCard = ({ testimonial, isActive }) => {
 
       <p>{testimonial.review}</p>
       <div className="flex items-center">
-        <Image
+        {/* <Image
           src={testimonial.reviewer.imageUrl}
           width={50}
           height={50}
           alt={testimonial.reviewer.name}
           className="rounded-full mr-4"
-        />
+        /> */}
         <div>
           <p className="mb-2">{testimonial.reviewer.name}</p>
-          <p className="text-sm text-gray-500">
+          {/* <p className="text-sm text-gray-500">
             {testimonial.reviewer.designation}
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
@@ -48,8 +54,7 @@ const NextArrow = (props) => {
   return (
     <div
       className={`${className} absolute top-1/2 -translate-y-1/2 right-4 z-10 cursor-pointer bg-white/30 backdrop-blur-sm rounded-full p-2`}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <ChevronRight className="h-6 w-6 text-black" />
     </div>
   );
@@ -60,8 +65,7 @@ const PrevArrow = (props) => {
   return (
     <div
       className={`${className} absolute top-1/2 -translate-y-1/2 left-4 z-10 cursor-pointer bg-white/30 backdrop-blur-sm rounded-full p-2`}
-      onClick={onClick}
-    >
+      onClick={onClick}>
       <ChevronLeft className="h-6 w-6 text-black" />
     </div>
   );

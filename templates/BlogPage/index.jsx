@@ -4,11 +4,10 @@ import Layout from "@/components/Layout";
 import React from "react";
 
 export default function BlogPage({ blogData }) {
-  const sortedBlogs = [...(blogData?.data || [])].sort(
-    (a, b) =>
-      new Date(b.attributes.publishedAt) - new Date(a.attributes.publishedAt)
+  const sortedBlogs = [...(blogData?.blogs || [])].sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
-  console.log(blogData?.data?.[0]);
+  // console.log(blogData?.blogs?.[0]);
   return (
     <>
       <Layout>

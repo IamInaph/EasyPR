@@ -13,7 +13,7 @@ header {
   @screen lg {
     @apply flex-row relative h-fit top-0 ml-auto justify-end items-center p-0  gap-8 border-0;
     .nav-link {
-      @apply text-base;
+      @apply text-sm font-medium;
     }
   }
   &.active {
@@ -21,7 +21,7 @@ header {
   }
 }
 .menu-button {
-  @apply fixed bottom-0 left-0 w-full z-50 p-3 border-t flex-row bg-white  min-w-[22rem] justify-end flex gap-2;
+  @apply fixed bottom-0 left-0 w-full z-50 p-3 border-t flex-row bg-white  min-w-[22rem] justify-end flex gap-2 items-center;
   .btn-main {
     @apply w-full;
   }
@@ -30,5 +30,5 @@ header {
   }
 }
 .nav-link {
-  @apply py-3 block text-base;
+  @apply py-3 block text-sm font-medium;
 }

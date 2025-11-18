@@ -8,6 +8,9 @@ import rehypeSanitize from "rehype-sanitize";
 const Layout = dynamic(() => import("@/components/Layout"));
 const BlogCard = dynamic(() => import("@/components/BlogCard"));
 import { format } from "date-fns";
+import { getMediaUrl } from "@/utils/media";
+import Image from "next/image";
+import { useEffect } from "react";
 
 import {
   FacebookShareButton,
@@ -17,12 +20,47 @@ import {
 import Head from "next/head";
 
 export default function BlogSingle({ blogData, params, className, allBlogs }) {
-  const shareUrl = "https://www.easyprwire.com/blogs/";
+  const shareUrl = `https://www.easyprwire.com/blogs/${blogData.slug}`;
 
-  const filteredBlogs = allBlogs?.filter(
-    (blog) => blog.id !== blogData.id
-  ).slice(0, 3);
-  
+  const featuredBlogs = blogData.related_blogs || [];
+
+  // Send view count to backend on page load
+  useEffect(() => {
+    // Create a unique key for this blog view
+    const viewKey = `blog-view-${blogData.slug}-${Date.now()}`;
+    const trackedViews = JSON.parse(sessionStorage.getItem('blogViews') || '{}');
+    
+    // Check if this exact page load has been tracked
+    if (trackedViews[blogData.slug] && Date.now() - trackedViews[blogData.slug] < 1000) {
+      return; // Skip if already tracked within the last second
+    }
+    
+    // Track this view
+    trackedViews[blogData.slug] = Date.now();
+    sessionStorage.setItem('blogViews', JSON.stringify(trackedViews));
+    
+    // Send view count to backend
+    fetch(`${process.env.NEXT_PUBLIC_BLOGS_API_URL}/api/blogs/update-view`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        slug: blogData.slug,
+      }),
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log("View count updated successfully");
+      } else {
+        console.error("Failed to update view count");
+      }
+    })
+    .catch(error => {
+      console.error("Error updating view count:", error);
+    });
+  }, []);
+
   return (
     <>
       <Layout>
@@ -30,21 +68,14 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
           <div className="max-w-3xl px-3 mx-auto">
             <div className="text-center">
               <div className="flex gap-4 justify-center text-xl max-sm:text-sm">
-                <div>
-                  {format(
-                    new Date(blogData?.attributes.publishedAt),
-                    "d MMM yyy"
-                  )}
-                </div>
+                <div>{format(new Date(blogData?.created_at), "d MMM yyy")}</div>
                 <div>|</div>
-                <div>
-                  {blogData.attributes.readableInMinutes || 5} min read
-                </div>
+                <div>{blogData.readableInMinutes || 5} min read</div>
                 <div>|</div>
                 <div>Marketing</div>
               </div>
               <h1 className="text-6xl mt-2 leading-tight max-sm:text-2xl">
-                {blogData.attributes.title}
+                {blogData.title}
               </h1>
               <div className="flex gap-4 justify-center mt-8">
                 <div className="h-12 w-12 border border-gray-300 rounded-full flex flex-col justify-center">
@@ -85,6 +116,19 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
           </div>
         </section>
         <div className="max-w-5xl mx-auto mt-12">
+          {blogData?.banner_image && (
+            <figure className="relative min-w-[10rem] block -mt-[10rem] sm:-mt-[20rem] mb-12">
+              <Image
+                src={getMediaUrl(blogData?.banner_image)}
+                height={2000}
+                width={2000}
+                priority
+                className="object-cover !aspect-auto"
+                alt={blogData?.banner_image_alt || "Blog image"}
+              />
+            </figure>
+          )}
+
           <div className="max-w-4xl mx-auto px-4">
             <article className="flex items-start gap-8">
               <div className="blog-content max-sm:text-lg overflow-x-auto text-justify">
@@ -132,7 +176,7 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
                       />
                     ),
                   }}>
-                  {blogData.attributes.content}
+                  {blogData.content}
                 </Markdown>
               </div>
             </article>
@@ -184,17 +228,14 @@ export default function BlogSingle({ blogData, params, className, allBlogs }) {
         <section>
           <div className="container mx-auto">
             <h2 className="text-center mb-6">Related Posts</h2>
+
             <div className="grid grid-cols-3 gap-8">
-              {filteredBlogs &&
-                filteredBlogs.slice(0, 3).map((item, index) => (
+              {Array.isArray(featuredBlogs) &&
+                featuredBlogs.slice(0, 3).map((item, index) => (
                   <div
                     className="col-span-3 md:col-span-1"
-                    key={"blog" + index}>
-                    <BlogCard
-                      blogs={item}
-                      key={"blog home" + index}
-                      className=""
-                    />
+                    key={`related-${index}`}>
+                    <BlogCard blogs={item} />
                   </div>
                 ))}
             </div>
