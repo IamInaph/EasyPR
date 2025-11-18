@@ -8,7 +8,7 @@
     @apply py-[.625rem];
   }
   &-lg {
-    @apply px-[1.75rem] py-[1rem] text-lg leading-relaxed min-h-[3.5rem];
+    @apply px-[20px] py-[1rem] text-lg leading-relaxed h-[48px];
   }
   &-main {
     @apply h-[3.5rem] px-[1.75rem];
@@ -45,11 +45,6 @@
     @apply bg-white border border-gray-300 text-gray-900  hover:border-slate-700 hover:bg-white hover:text-gray-900;
     transition: all 0.15s ease-in-out;
     z-index: 3;
-  }
-  &-custom-padding {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    height: 48px !important;
   }
 }
 

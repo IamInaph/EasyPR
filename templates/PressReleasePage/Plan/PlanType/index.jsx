@@ -57,7 +57,7 @@ export default function PlanType({ plan }) {
 											<div>
 												<Link
 													href={`https://orders.easyprwire.com/${item.attributes.name.toLowerCase()}`}
-													className='btn btn-outline w-full bg-transparent hover:bg-transparent'
+													className='btn btn-outline btn-lg w-full bg-transparent hover:bg-transparent'
 													target='_blank'
 												>
 													Order Now

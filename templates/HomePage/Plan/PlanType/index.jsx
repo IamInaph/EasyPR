@@ -22,6 +22,7 @@ export default function PlanType({ plan, indiePage }) {
     window.addEventListener("scroll", listenScrollEvent);
     return () => window.removeEventListener("scroll", listenScrollEvent);
   }, [indiePage, istop]);
+
   const handleReportDownload = (e, name, url) => {
     e.preventDefault();
     const reportUrl = `${process.env.NEXT_PUBLIC_API_URL}${url}`;
@@ -63,7 +64,8 @@ export default function PlanType({ plan, indiePage }) {
                           </strong>
                         </div>
 
-                        <span className={`stick-text ${!istop && "hidden"}`}>
+                        <span className="stick-text">
+                          For {item.attributes.businessType} business
                         </span>
                       </div>
                       <div
@@ -84,7 +86,8 @@ export default function PlanType({ plan, indiePage }) {
                         </div>
                         <DownloadCloud className="duration-200 group-hover:scale-110 w-4 h-4" />
                       </div>
-                      <div className={`${!istop && "hidden"}`}>
+                      <div>
+                        <strong className="stick-amount-primary">
                           ${item.attributes.offerPrice}{" "}
                           <span className="line-through text-xl text-gray-500">
                             {" "}
@@ -93,10 +96,10 @@ export default function PlanType({ plan, indiePage }) {
                         </strong>
                         <span className="stick-text">One time payment</span>
                       </div>
-                      <div className="flex-grow flex items-end justify-center">
+                      <div>
                         <Link
                           href={`https://orders.easyprwire.com/${item.attributes.name.toLowerCase()}`}
-                          className="btn btn-outline w-full bg-transparent hover:bg-transparent btn-custom-padding"
+                          className="btn btn-outline btn-lg w-full bg-transparent hover:bg-transparent"
                           target="_blank">
                           Order Now
                         </Link>
