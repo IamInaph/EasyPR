@@ -188,7 +188,7 @@ export default function ContactPage({ content }) {
               <div className="lg:col-span-2 col-span-3 lg:px-12">
                 <form onSubmit={postContact}>
                   <div className="flex sm:gap-4 max-sm:flex-col">
-                    <label className="form-control w-full ">
+                    <label className="form-control w-full mb-6">
                       <div className="label">
                         <span className="label-text">Your full name</span>
                       </div>
@@ -200,14 +200,15 @@ export default function ContactPage({ content }) {
                       <input
                         type="text"
                         placeholder="Enter your full name (minimum 3 characters)"
-                        className="input input-bordered w-full input-lg px-6 py-5 border border-gray-400"
+                        className="input input-bordered w-full input-lg px-6 py-5 border border-gray-200 focus:border-gray-500/50 transition-none"
                         value={sender_full_name}
                         onChange={handleFName}
                         required
+                        autoFocus
                       />
                     </label>
                   </div>
-                  <label className="form-control w-full ">
+                  <label className="form-control w-full mb-6">
                     <div className="label">
                       <span className="label-text">
                         Your Whatsapp/Telegram no.
@@ -221,13 +222,13 @@ export default function ContactPage({ content }) {
                     <input
                       type="text"
                       placeholder="Enter a valid phone no. (e.g., +1 41XXXXXXXX)"
-                      className="input input-bordered w-full input-lg px-6 py-5 border border-gray-400"
+                      className="input input-bordered w-full input-lg px-6 py-5 border border-gray-200 focus:outline-none focus:border-gray-300"
                       value={sender_telegram}
                       onChange={handleTelegram}
                       required
                     />
                   </label>
-                  <label className="form-control w-full ">
+                  <label className="form-control w-full mb-6">
                     <div className="label">
                       <span className="label-text">Your email address</span>
                     </div>
@@ -239,14 +240,14 @@ export default function ContactPage({ content }) {
                     <input
                       type="email"
                       placeholder="Enter a valid email address (e.g., name@example.com)"
-                      className="input input-bordered w-full input-lg px-6 py-5 border border-gray-400"
+                      className="input input-bordered w-full input-lg px-6 py-5 border border-gray-200 focus:outline-none focus:border-gray-300"
                       value={sender_email}
                       onChange={handleEmail}
                       required
                     />
                   </label>
 
-                  <label className="form-control w-full ">
+                  <label className="form-control w-full mb-6">
                     <div className="label">
                       <span className="label-text">
                         Your Website URL (Optional)
@@ -260,19 +261,19 @@ export default function ContactPage({ content }) {
                     <input
                       type="text"
                       placeholder="Enter your website url (e.g., https://www.abc.xyz/...)"
-                      className="input input-bordered w-full input-lg px-6 py-5 border border-gray-400"
+                      className="input input-bordered w-full input-lg px-6 py-5 border border-gray-200 focus:outline-none focus:border-gray-300"
                       onChange={handleWebURL}
                       value={sender_url}
                     />
                   </label>
-                  <label className="form-control w-full ">
+                  <label className="form-control w-full mb-6">
                     <div className="label">
                       <span className="label-text">
                         Tell us something that you want
                       </span>
                     </div>
                     <textarea
-                      className="textarea textarea-bordered textarea-lg w-full min-h-[10rem] py-4 px-6 border border-gray-400"
+                      className="textarea textarea-bordered textarea-lg w-full min-h-[10rem] py-4 px-6 border border-gray-200 focus:border-gray-500/50 transition-none"
                       placeholder="Tell us something that you want..."
                       required
                       value={sender_message}
